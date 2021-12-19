@@ -13,6 +13,7 @@ export class AccountService {
     uuid: "",
     username: "",
     password: "",
+    email: "",
     firstName: "",
     lastName: "",
     token: "",

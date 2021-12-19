@@ -7,6 +7,7 @@ import { AccountService } from "../_services";
 @Component({ templateUrl: "list.component.html" })
 export class ListComponent implements OnInit {
   users: User[] | undefined;
+  value: Date = new Date();
 
   constructor(private accountService: AccountService) {}
 

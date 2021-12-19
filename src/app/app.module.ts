@@ -1,6 +1,5 @@
 import { NgModule } from "@angular/core";
 import { BrowserModule } from "@angular/platform-browser";
-import { ReactiveFormsModule } from "@angular/forms";
 import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 
 // used to create fake backend
@@ -11,13 +10,17 @@ import { JwtInterceptor, ErrorInterceptor } from "./_helpers";
 import { AppComponent } from "./app.component";
 import { AlertComponent } from "./_components";
 import { HomeComponent } from "./home";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+
+import { MenubarModule } from "primeng/menubar";
 
 @NgModule({
   imports: [
     BrowserModule,
-    ReactiveFormsModule,
+    BrowserAnimationsModule,
     HttpClientModule,
     AppRoutingModule,
+    MenubarModule,
   ],
   declarations: [AppComponent, AlertComponent, HomeComponent],
   providers: [
