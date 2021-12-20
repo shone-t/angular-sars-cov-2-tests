@@ -1,0 +1,19 @@
+.covid-status-badge {
+    border-radius: 2px;
+    padding: 0.25em 0.5rem;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: .3px;
+}
+
+.covid-status-badge.status-negative {
+    background: #C8E6C9;
+    color: #256029;
+}
+
+
+.covid-status-badge.status-positive {
+    background: #FFCDD2;
+    color: #c63737;
+}
