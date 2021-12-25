@@ -6,7 +6,6 @@ import { CovidTestsComponent } from "./covid-tests.component";
 import { FormComponent } from "./form/form.component";
 import { ToastModule } from "primeng/toast";
 import { MessageService } from "primeng/api";
-import { FileUploadModule } from "primeng/fileupload";
 import { ButtonModule } from "primeng/button";
 import { TableModule } from "primeng/table";
 import { ToolbarModule } from "primeng/toolbar";
@@ -17,6 +16,11 @@ import { InputTextModule } from "primeng/inputtext";
 import { InputTextareaModule } from "primeng/inputtextarea";
 import { BadgeModule } from "primeng/badge";
 import { CovidTestsService } from "../_services/covidTest.sevice";
+import { AutoCompleteModule } from "primeng/autocomplete";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { CandidatesService } from "../_services/candidates.service";
+import { CalendarModule } from "primeng/calendar";
+import { InputMaskModule } from "primeng/inputmask";
 
 @NgModule({
   declarations: [CovidTestsComponent, FormComponent],
@@ -24,7 +28,6 @@ import { CovidTestsService } from "../_services/covidTest.sevice";
     CommonModule,
     CovidTestsRoutingModule,
     ToastModule,
-    FileUploadModule,
     ButtonModule,
     TableModule,
     ToolbarModule,
@@ -34,7 +37,12 @@ import { CovidTestsService } from "../_services/covidTest.sevice";
     InputTextModule,
     InputTextareaModule,
     BadgeModule,
+    AutoCompleteModule,
+    FormsModule,
+    ReactiveFormsModule,
+    CalendarModule,
+    InputMaskModule,
   ],
-  providers: [MessageService, CovidTestsService],
+  providers: [MessageService, CovidTestsService, CandidatesService],
 })
 export class CovidTestsModule {}

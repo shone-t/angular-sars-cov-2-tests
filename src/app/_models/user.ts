@@ -5,6 +5,7 @@
   email: string | undefined;
   firstName: string | undefined;
   lastName: string | undefined;
+  name: string | undefined;
   token: string | undefined;
   isDeleting?: boolean | undefined;
 }

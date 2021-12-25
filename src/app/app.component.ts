@@ -16,63 +16,17 @@ export class AppComponent {
       {
         label: "Covid Tests",
         icon: "pi pi-fw pi-pencil",
-        items: [
-          {
-            label: "New",
-            icon: "pi pi-fw pi-plus",
-            routerLink: "/covid-tests/form",
-          },
-          {
-            separator: true,
-          },
-          {
-            label: "List of result",
-            icon: "pi pi-fw pi-list",
-            routerLink: "/covid-tests",
-          },
-        ],
+        routerLink: "/covid-tests",
       },
       {
         label: "Candidate",
         icon: "pi pi-fw pi-user",
-        items: [
-          {
-            label: "New",
-            icon: "pi pi-fw pi-user-plus",
-            routerLink: "/users/add",
-            routerLinkActiveOptions: "active",
-          },
-          {
-            separator: true,
-          },
-          {
-            label: "List of Candidates",
-            icon: "pi pi-fw pi-list",
-            routerLink: "/users",
-            routerLinkActiveOptions: "active",
-          },
-        ],
+        routerLink: "/employees",
       },
       {
         label: "Users",
         icon: "pi pi-fw pi-user",
-        items: [
-          {
-            label: "New",
-            icon: "pi pi-fw pi-user-plus",
-            routerLink: "/users/add",
-            routerLinkActiveOptions: "active",
-          },
-          {
-            separator: true,
-          },
-          {
-            label: "List of users",
-            icon: "pi pi-fw pi-list",
-            routerLink: "/users",
-            routerLinkActiveOptions: "active",
-          },
-        ],
+        routerLink: "/users",
       },
       {
         label: "Quit",

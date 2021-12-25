@@ -22,8 +22,7 @@ export class RegisterComponent implements OnInit {
     private alertService: AlertService
   ) {
     this.form = this.formBuilder.group({
-      firstName: ["", Validators.required],
-      lastName: ["", Validators.required],
+      name: ["", Validators.required],
       username: ["", Validators.required],
       email: ["", Validators.required, Validators.email],
       password: ["", [Validators.required, Validators.minLength(6)]],

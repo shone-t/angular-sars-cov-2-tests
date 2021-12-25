@@ -10,12 +10,15 @@ const usersModule = () =>
   import("./users/users.module").then((x) => x.UsersModule);
 const covidTest = () =>
   import("./covid-tests/covid-tests.module").then((m) => m.CovidTestsModule);
+const employees = () =>
+  import("./employees/employees.module").then((m) => m.EmployeesModule);
 
 const routes: Routes = [
   { path: "", component: HomeComponent, canActivate: [AuthGuard] },
   { path: "users", loadChildren: usersModule, canActivate: [AuthGuard] },
   { path: "account", loadChildren: accountModule },
-  { path: "covid-tests", loadChildren: covidTest },
+  { path: "covid-tests", loadChildren: covidTest, canActivate: [AuthGuard] },
+  { path: "employees", loadChildren: employees, canActivate: [AuthGuard] },
 
   // otherwise redirect to home
   { path: "**", redirectTo: "" },

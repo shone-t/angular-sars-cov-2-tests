@@ -16,6 +16,7 @@ export class AccountService {
     email: "",
     firstName: "",
     lastName: "",
+    name: "",
     token: "",
   };
 
