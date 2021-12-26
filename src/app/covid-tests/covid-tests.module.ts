@@ -21,6 +21,8 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { CandidatesService } from "../_services/candidates.service";
 import { CalendarModule } from "primeng/calendar";
 import { InputMaskModule } from "primeng/inputmask";
+import { InputSwitchModule } from "primeng/inputswitch";
+import { AccordionModule } from "primeng/accordion";
 
 @NgModule({
   declarations: [CovidTestsComponent, FormComponent],
@@ -42,6 +44,8 @@ import { InputMaskModule } from "primeng/inputmask";
     ReactiveFormsModule,
     CalendarModule,
     InputMaskModule,
+    InputSwitchModule,
+    AccordionModule,
   ],
   providers: [MessageService, CovidTestsService, CandidatesService],
 })

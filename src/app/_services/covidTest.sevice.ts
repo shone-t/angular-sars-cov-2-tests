@@ -22,9 +22,9 @@ export class CovidTestsService {
     return urlBuilder.toString();
   }
 
-  getAllEmployees(): Observable<any> {
-    return this.http.get(`${environment.apiUrl}/employees`);
-  }
+  // getAllEmployees(): Observable<any> {
+  //   return this.http.get(`${environment.apiUrl}/employees`);
+  // }
 
   getAllTest(
     limit: any,

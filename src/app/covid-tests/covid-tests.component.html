@@ -92,7 +92,7 @@
     <ng-template pTemplate="content">
         <!-- list of employee -->
         <div class="p-field" *ngIf="!editMode">
-            <label for="name">autocomplete</label>
+            <label for="name">Employee</label>
             <p-autoComplete [(ngModel)]="autoCompleteText" [suggestions]="autoCompleteResults"
                 (completeMethod)="autoCompleteSearch($event)" field="name" [dropdown]="true"
                 (onSelect)="handleDropdown($event)">
@@ -104,65 +104,86 @@
             </p-autoComplete>
         </div>
 
-        <!-- forma -->
         <form autocomplete="off" [formGroup]="formCovidTest" (ngSubmit)="saveCovidTest()">
-            <div class="p-field">
-                <label for="name">Name</label>
-                <input type="text" [attr.disabled]="selectedEmployee ? '' : null" formControlName="name" pInputText
-                    id="name" required autofocus />
+            <div class="p-field p-mb-1">
+                <label for="description">Name</label>
+                <div class="p-inputgroup">
+                    <span class="p-inputgroup-addon"><i class="pi pi-user"></i></span>
+                    <input type="text" [attr.disabled]="selectedEmployee || editMode ? '' : null" formControlName="name"
+                        pInputText required autofocus placeholder="Name">
+                </div>
             </div>
-            <div class="p-field">
+            <div class="p-field p-mb-1">
                 <label for="description">Address</label>
-                <textarea id="description" [attr.disabled]="selectedEmployee ? '' : null" formControlName="address"
-                    pInputTextarea required rows="3" cols="20"></textarea>
+                <div class="p-inputgroup">
+                    <span class="p-inputgroup-addon"><i class="pi pi-compass"></i></span>
+                    <input type="text" formControlName="address"
+                        [attr.disabled]="selectedEmployee || editMode ? '' : null" pInputText required autofocus
+                        placeholder="Address">
+                </div>
             </div>
-            <div class="p-field">
+            <div class="p-field p-mb-1">
                 <label for="description">Date of birth</label>
-                <p-inputMask mask="99/99/9999" formControlName="dateOfBirth" [disabled]="selectedEmployee"
-                    placeholder="21.12.1990" slotChar="dd.mm.yyyy">
-                </p-inputMask>
+                <div class="p-field date-mask-input">
+                    <span class="p-inputgroup-addon"><i class="pi pi-calendar"></i></span>
+                    <p-inputMask mask="99/99/9999" [disabled]="selectedEmployee || editMode" formControlName=""
+                        placeholder="21.12.1990" slotChar="dd.mm.yyyy">
+                    </p-inputMask>
+                </div>
             </div>
-            <div class="p-field">
-                <label for="name">Email</label>
-                <input type="text" [attr.disabled]="selectedEmployee ? '' : null" formControlName="emailOrTelephone"
-                    pInputText id="emailOrTelephone" required autofocus />
-            </div>
-            <div class="p-field">
-                <label for="inventoryStatus">Covid Test Status</label>
-                <p-dropdown inputId="inventoryStatus" [options]="statuses" formControlName="testResult"
-                    placeholder="Select">
-                    <ng-template let-option pTemplate="item">
-                        <span [class]="'covid-status-badge status-' + option.value">{{
-                            option.label
-                            }}</span>
-                    </ng-template>
-                </p-dropdown>
+            <div class="p-field p-mb-1">
+                <label for="description">Email or phone</label>
+                <div class="p-inputgroup">
+                    <span class="p-inputgroup-addon"><i class="pi pi-envelope"></i></span>
+                    <input type="text" formControlName="emailOrTelephone"
+                        [attr.disabled]="selectedEmployee || editMode ? '' : null" pInputText id="emailOrTelephone"
+                        required autofocus placeholder="Email or phone" />
+                </div>
             </div>
 
-            <div class="p-field">
-                <div class="p-col-6">
-                    <label for="time">Time</label>
-                    <p-calendar formControlName="createdTest" [disabled]="dateLock" dateFormat="dd.mm.yy"
-                        [showTime]="true" [showSeconds]="true" inputId="time">
-                    </p-calendar>
+            <div class="p-fluid p-formgrid p-grid">
+                <div class="p-field p-col-6">
+                    <label for="inventoryStatus">Covid Test Status</label>
+                    <p-dropdown inputId="inventoryStatus" [options]="statuses" formControlName="testResult"
+                        placeholder="Select">
+                        <ng-template let-option pTemplate="item">
+                            <span [class]="'covid-status-badge status-' + option.value">{{
+                                option.label
+                                }}</span>
+                        </ng-template>
+                    </p-dropdown>
+                </div>
+                <div class="p-field p-col-6">
+                    <div class="p-field">
+                        <div class="p-col-6">
+                            <label for="time">Time</label>
+                            <p-calendar formControlName="createdTest" [disabled]="dateLock" [showIcon]="true"
+                                dateFormat="dd.mm.yy" [showTime]="true" [showSeconds]="true" inputId="time">
+                            </p-calendar>
+                        </div>
+                        <div class="p-col-6">
+                            <button type="button" pButton pRipple label="Now" [disabled]="dateLock" (click)="dateNow()"
+                                icon="pi pi-times" class="p-button-text"></button>
+                            <label>Unlock</label>
+                            <p-inputSwitch (onChange)="dateDisabled()"></p-inputSwitch>
+                            <!-- <button type="button" pButton pRipple [label]="dateLock ? 'Unlock' : 'Lock'"
+                                    (click)="dateDisabled()" [icon]="dateLock ? 'pi pi-lock' : 'pi pi-unlock'"
+                                    class="p-button-text"></button> -->
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="p-field">
-                <div class="p-col-6">
-                    <button type="button" pButton pRipple label="Now" [disabled]="dateLock" (click)="dateNow()"
-                        icon="pi pi-times" class="p-button-text"></button>
-                    <button type="button" pButton pRipple [label]="dateLock ? 'Unlock' : 'Lock'"
-                        (click)="dateDisabled()" [icon]="dateLock ? 'pi pi-lock' : 'pi pi-unlock'"
-                        class="p-button-text"></button>
-                </div>
-            </div>
-            <div class="p-field">
-                <label for="description">Message</label>
-                <textarea id="description" formControlName="internalMessage" pInputTextarea rows="3"
-                    cols="20"></textarea>
-            </div>
+            <p-accordion>
+                <p-accordionTab header="Additional info">
+                    <div class="p-field">
+                        <label for="description">Message</label>
+                        <textarea id="description" formControlName="internalMessage" pInputTextarea rows="3"
+                            cols="20"></textarea>
+                    </div>
+                </p-accordionTab>
+            </p-accordion>
+
         </form>
-        <!-- forma -->
     </ng-template>
 
     <ng-template pTemplate="footer">

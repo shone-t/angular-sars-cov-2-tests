@@ -130,3 +130,24 @@ a {
     }
   }
 }
+
+.date-mask-input {
+  display: flex;
+  align-items: stretch;
+  width: 100%;
+
+  p-inputmask {
+    flex: 1 1 auto;
+    width: 1%;
+
+    input.p-inputtext {
+      border-radius: 0;
+      border-top-right-radius: 0.375rem;
+      border-bottom-right-radius: 0.375rem;
+    }
+  }
+}
+
+.p-mb-1 {
+  margin-bottom: 1em;
+}

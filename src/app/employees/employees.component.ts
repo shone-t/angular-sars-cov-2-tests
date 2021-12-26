@@ -38,7 +38,7 @@ export class EmployeesComponent implements OnInit {
       name: ["", Validators.required],
       address: ["", Validators.required],
       dateOfBirth: ["", Validators.required],
-      emailOrTelephone: ["", [Validators.required, Validators.email]],
+      emailOrTelephone: ["", [Validators.required]],
     });
   }
 
@@ -64,7 +64,7 @@ export class EmployeesComponent implements OnInit {
       )
       .pipe(take(1))
       .subscribe((data) => {
-        this.employeesData = data;
+        this.employeesData = data["rows"];
         this.totalRecords = data["count"];
         this.loading = false;
       });
@@ -105,15 +105,19 @@ export class EmployeesComponent implements OnInit {
       .pipe(take(1))
       .subscribe({
         next: () => {
-          this.alertService.success("Employee added successfully");
+          this.alertService.success("Employee added successfully", {
+            shoneTest: true,
+          });
           this.productDialog = false;
           this.loading = false;
           this.loadEmployees(this.lastTableLazyLoadEvent);
+          this.formEmployee.reset();
         },
         error: (error) => {
           this.alertService.error(error);
           this.productDialog = false;
           this.loading = false;
+          this.formEmployee.reset();
         },
       });
   }

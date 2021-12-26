@@ -11,7 +11,7 @@ import { AppComponent } from "./app.component";
 import { AlertComponent } from "./_components";
 import { HomeComponent } from "./home";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
-
+import { AvatarModule } from "primeng/avatar";
 import { MenubarModule } from "primeng/menubar";
 
 @NgModule({
@@ -21,6 +21,7 @@ import { MenubarModule } from "primeng/menubar";
     HttpClientModule,
     AppRoutingModule,
     MenubarModule,
+    AvatarModule,
   ],
   declarations: [AppComponent, AlertComponent, HomeComponent],
   providers: [

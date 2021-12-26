@@ -76,43 +76,42 @@
 <p-dialog [(visible)]="productDialog" [style]="{ width: '80%' }" [header]="editMode ? 'Edit Test' : 'Create New'"
     [modal]="true" [draggable]="false" styleClass="p-fluid">
     <ng-template pTemplate="content">
-        <!-- list of employee -->
-        <div class="p-field" *ngIf="!editMode">
-            <label for="name">autocomplete</label>
-            <!-- <p-autoComplete [(ngModel)]="autoCompleteText" [suggestions]="autoCompleteResults"
-                (completeMethod)="autoCompleteSearch($event)" field="name" [dropdown]="true"
-                (onSelect)="handleDropdown($event)">
-                <ng-template let-test pTemplate="item">
-                    <div class="country-item">
-                        <div>{{ test.name }} - {{ test.updatedAt }}</div>
-                    </div>
-                </ng-template>
-            </p-autoComplete> -->
-        </div>
-
-        <!-- forma -->
         <form autocomplete="off" [formGroup]="formEmployee" (ngSubmit)="saveEmployee()">
-            <div class="p-field">
-                <label for="name">Name</label>
-                <input type="text" formControlName="name" pInputText id="name" required autofocus />
+
+            <div class="p-field p-mb-1">
+                <label for="description">Name</label>
+                <div class="p-inputgroup">
+                    <span class="p-inputgroup-addon"><i class="pi pi-user"></i></span>
+                    <input type="text" formControlName="name" pInputText required autofocus placeholder="Name">
+                </div>
             </div>
-            <div class="p-field">
+
+            <div class="p-field p-mb-1">
                 <label for="description">Address</label>
-                <input id="description" formControlName="address" pInputTextarea required />
+                <div class="p-inputgroup">
+                    <span class="p-inputgroup-addon"><i class="pi pi-compass"></i></span>
+                    <input type="text" formControlName="address" pInputText required autofocus placeholder="Address">
+                </div>
             </div>
-            <div class="p-field">
+
+            <div class="p-field p-mb-1">
                 <label for="description">Date of birth</label>
-                <p-inputMask mask="99/99/9999" formControlName="dateOfBirth" placeholder="21.12.1990"
-                    slotChar="dd.mm.yyyy">
-                </p-inputMask>
+                <div class="p-field date-mask-input">
+                    <span class="p-inputgroup-addon"><i class="pi pi-calendar"></i></span>
+                    <p-inputMask mask="99/99/9999" formControlName="" placeholder="21.12.1990" slotChar="dd.mm.yyyy">
+                    </p-inputMask>
+                </div>
             </div>
-            <div class="p-field">
-                <label for="name">Email</label>
-                <input type="text" formControlName="emailOrTelephone" pInputText id="emailOrTelephone" required
-                    autofocus />
+
+            <div class="p-field p-mb-1">
+                <label for="description">Email or phone</label>
+                <div class="p-inputgroup">
+                    <span class="p-inputgroup-addon"><i class="pi pi-envelope"></i></span>
+                    <input type="text" formControlName="emailOrTelephone" pInputText id="emailOrTelephone" required
+                        autofocus placeholder="Email or phone" />
+                </div>
             </div>
         </form>
-        <!-- forma -->
     </ng-template>
 
     <ng-template pTemplate="footer">

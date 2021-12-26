@@ -13,7 +13,7 @@ export class CandidatesService {
   constructor(private http: HttpClient) {}
 
   getAllUsers(): Observable<any> {
-    return this.http.get(`${environment.apiUrl}/employees`);
+    return this.http.get(`${environment.apiUrl}/employees/list`);
   }
 
   private createUrlWithQueryParameters(

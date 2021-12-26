@@ -52,17 +52,12 @@ export class CovidTestsComponent implements OnInit {
       idUser: [""],
       userName: [""],
       testResult: [true, Validators.required],
-      createdTest: [{ value: new Date(), disabled: true }, Validators.required],
+      createdTest: [new Date(), Validators.required],
       internalMessage: [""],
     });
   }
 
   ngOnInit(): void {
-    this.covidTestService
-      .getAllEmployees()
-      .pipe(take(1))
-      .subscribe((data: any) => {});
-
     this.employees
       .getAllUsers()
       .pipe(take(1))
@@ -71,8 +66,8 @@ export class CovidTestsComponent implements OnInit {
       });
 
     this.statuses = [
-      { label: "POSITIVE", value: "positive" },
-      { label: "NEGATIVE", value: "negative" },
+      { label: "POSITIVE", value: true },
+      { label: "NEGATIVE", value: false },
     ];
   }
 
@@ -138,28 +133,35 @@ export class CovidTestsComponent implements OnInit {
   }
 
   searchCovidTest(event: any) {
-    this.searchText = event["data"];
-    let sortOrder = "";
-    if (this.filterValue.sortOrder == -1) {
-      sortOrder = "DESC";
-    } else {
-      sortOrder = "ASC";
-    }
+    if (
+      event["target"]["value"].length === 0 ||
+      event["target"]["value"].length > 2
+    ) {
+      this.searchText = event["target"]["value"];
+      let sortOrder = "";
+      if (this.filterValue.sortOrder == -1) {
+        sortOrder = "DESC";
+      } else {
+        sortOrder = "ASC";
+      }
 
-    this.covidTestService
-      .getAllTest(
-        this.filterValue.first,
-        this.filterValue.sortOrder,
-        this.filterValue.sortField ?? "",
-        this.filterValue.rows,
-        this.searchText
-      )
-      .pipe(take(1))
-      .subscribe((data: any) => {
-        this.covidTestsData = data["rows"];
-        this.totalRecords = data["count"];
-        this.loading = false;
-      });
+      console.log(this.searchText);
+
+      this.covidTestService
+        .getAllTest(
+          this.filterValue.first,
+          sortOrder,
+          this.filterValue.sortField ?? "",
+          this.filterValue.rows,
+          this.searchText
+        )
+        .pipe(take(1))
+        .subscribe((data: any) => {
+          this.covidTestsData = data["rows"];
+          this.totalRecords = data["count"];
+          this.loading = false;
+        });
+    }
   }
 
   autoCompleteSearch(event: any) {
@@ -203,11 +205,13 @@ export class CovidTestsComponent implements OnInit {
           this.productDialog = false;
           this.loading = false;
           this.loadTests(this.lastTableLazyLoadEvent);
+          this.formCovidTest.reset();
         },
         error: (error) => {
           this.alertService.error(error);
           this.productDialog = false;
           this.loading = false;
+          this.formCovidTest.reset();
         },
       });
   }
