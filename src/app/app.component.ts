@@ -1,6 +1,6 @@
 import { Component } from "@angular/core";
 
-import { AccountService } from "./_services";
+import { AccountService, AlertService } from "./_services";
 import { User } from "./_models";
 import { MenuItem } from "primeng/api";
 
@@ -8,9 +8,31 @@ import { MenuItem } from "primeng/api";
 export class AppComponent {
   user: User | undefined;
   items: MenuItem[];
+  userItems: MenuItem[];
+  initials: String;
+  fullName: String;
 
-  constructor(private accountService: AccountService) {
+  constructor(private accountService: AccountService,  private alertService: AlertService) {
+    this.initials = JSON.parse(localStorage.getItem("user")!)
+      .name.split(" ")
+      .map((n: any) => n[0])
+      .join("")
+      .toUpperCase();
+    this.fullName = JSON.parse(localStorage.getItem("user")!).name;
     this.accountService.user.subscribe((x) => (this.user = x));
+
+    this.userItems = [
+      {
+        label: "User options",
+        items: [
+          {
+            label: "Logout",
+            command: () => this.logout(),
+            icon: "pi pi-fw pi-power-off",
+          },
+        ],
+      },
+    ];
 
     this.items = [
       {
@@ -28,11 +50,7 @@ export class AppComponent {
         icon: "pi pi-fw pi-user",
         routerLink: "/users",
       },
-      {
-        label: "Quit",
-        command: () => this.logout(),
-        icon: "pi pi-fw pi-power-off",
-      },
+      
     ];
   }
 

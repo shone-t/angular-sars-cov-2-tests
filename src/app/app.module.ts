@@ -8,11 +8,16 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { AppRoutingModule } from "./app-routing.module";
 import { JwtInterceptor, ErrorInterceptor } from "./_helpers";
 import { AppComponent } from "./app.component";
-import { AlertComponent } from "./_components";
 import { HomeComponent } from "./home";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { AvatarModule } from "primeng/avatar";
 import { MenubarModule } from "primeng/menubar";
+import { MenuModule } from 'primeng/menu';
+import { ButtonModule } from "primeng/button";
+import { MessagesModule } from 'primeng/messages';
+import { MessageModule } from 'primeng/message';
+import { ToastModule } from 'primeng/toast';
+import { MessageService } from 'primeng/api';
 
 @NgModule({
   imports: [
@@ -21,10 +26,16 @@ import { MenubarModule } from "primeng/menubar";
     HttpClientModule,
     AppRoutingModule,
     MenubarModule,
+    MenuModule,
+    ButtonModule,
     AvatarModule,
+    MessagesModule,
+        MessageModule,
+        ToastModule,
   ],
-  declarations: [AppComponent, AlertComponent, HomeComponent],
+  declarations: [AppComponent, HomeComponent],
   providers: [
+    MessageService,
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
 

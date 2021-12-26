@@ -105,9 +105,7 @@ export class EmployeesComponent implements OnInit {
       .pipe(take(1))
       .subscribe({
         next: () => {
-          this.alertService.success("Employee added successfully", {
-            shoneTest: true,
-          });
+          this.alertService.success("Employee added successfully");
           this.productDialog = false;
           this.loading = false;
           this.loadEmployees(this.lastTableLazyLoadEvent);

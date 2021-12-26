@@ -9,9 +9,11 @@
 </nav> -->
 <div class="main-content">
   <p-menubar [model]="items">
-    <!-- <img routerLink="/" src="assets/showcase/images/agv-vector-logo.png" height="50" class="bg-light p-mr-2"> -->
-    <p-avatar label="PE"></p-avatar>
-  </p-menubar>
+    <button class="p-button-secondary" type="button" pButton (click)="menu.toggle($event)"> {{fullName}} <p-avatar
+      label="{{initials}}" class="pl-3" [style]="{'background-color':'#2196F3', 'color': '#ffffff'}" shape="circle"></p-avatar> </button>
+  <p-menu #menu [popup]="true" [model]="userItems" ></p-menu>
+</p-menubar>
+  
   <div>
     <div class="bg-gradient-danger">
       <div class="container">
@@ -26,7 +28,7 @@
 
     <!-- main app container -->
     <div class="app-container">
-      <alert></alert>
+      <p-toast position="bottom-center"></p-toast>
       <router-outlet></router-outlet>
     </div>
   </div>
