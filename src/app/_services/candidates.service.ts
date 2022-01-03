@@ -49,15 +49,23 @@ export class CandidatesService {
     );
   }
 
+  // getTestsForEmployee(uuid: string): Observable<any> {
+  //   return this.http.get(`${environment.apiUrl}/covid-tests/employee/${uuid}`);
+  // }
+
   saveEmployee(employee: Employee, edit: boolean): Observable<any> {
     if (edit) {
-      return this.http
-        .put(`${environment.apiUrl}/employees/${employee.uuid}`, employee)
-        .pipe(tap((res) => console.log("service res:", res)));
+      return this.http.put(
+        `${environment.apiUrl}/employees/${employee.uuid}`,
+        employee
+      );
     } else {
-      return this.http
-        .post(`${environment.apiUrl}/employees`, employee)
-        .pipe(tap((res) => console.log("service res:", res)));
+      return this.http.post(`${environment.apiUrl}/employees`, employee);
     }
+  }
+
+  deleteEmployee(id: String): Observable<any> {
+    console.log("unutar servisa", id);
+    return this.http.delete(`${environment.apiUrl}/employees/${id}`);
   }
 }

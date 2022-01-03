@@ -1,6 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { Observable, tap } from "rxjs";
+import { Observable, of, tap } from "rxjs";
 import { environment } from "src/environments/environment";
 import { QueryStringParameters } from "../_helpers/query-string-parameters";
 import { UrlBuilder } from "../_helpers/url-builder";
@@ -49,6 +49,8 @@ export class CovidTestsService {
 
   saveTest(testData: CovidTest, edit: boolean): Observable<any> {
     if (edit) {
+      // console.log("testData", testData);
+      // return of(testData);
       return this.http
         .put(`${environment.apiUrl}/covid-tests/${testData.uuid}`, testData)
         .pipe(tap((res) => console.log("service res:", res)));

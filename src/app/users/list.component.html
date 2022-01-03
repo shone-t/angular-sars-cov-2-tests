@@ -67,15 +67,18 @@
                     <!-- <th style="width: 3rem">
                         <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
                     </th> -->
-                    <th pSortableColumn="name">
+                    <!-- <th pSortableColumn="name">
                         Name <p-sortIcon field="name"></p-sortIcon>
                     </th>
-                    <th pSortableColumn="username">Date of birth <p-sortIcon field="username"></p-sortIcon>
+                    <th pSortableColumn="username">Username <p-sortIcon field="username"></p-sortIcon>
                     </th>
                     <th pSortableColumn="email">
                         Email or Telephone
                         <p-sortIcon field="email"> </p-sortIcon>
-                    </th>
+                    </th> -->
+                    <th>Name</th>
+                    <th>Username</th>
+                    <th>Email or Telephone</th>
                     <th></th>
                 </tr>
             </ng-template>
@@ -87,11 +90,11 @@
                     <td>{{ user.name }}</td>
                     <td>{{ user.username }}</td>
                     <td>{{ user.email }}</td>
-                    <td class="text-right">
+                    <td class="text-right d-flex-md">
                         <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success p-mr-2"
                             style="margin-right: 1em" (click)="editUser(user)"></button>
-                        <button pButton pRipple icon="pi pi-trash" (click)="deleteUser(user.uuid ?? '')"
-                            class="p-button-rounded p-button-warning"></button>
+                        <button pButton pRipple icon="pi pi-trash" (click)="deleteUser(user && user.uuid ?? '')"
+                            class="p-button-rounded p-button-danger"></button>
                     </td>
                 </tr>
             </ng-template>

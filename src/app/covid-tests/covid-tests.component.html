@@ -1,197 +1,207 @@
 <!-- <p-toast></p-toast> -->
 <div class="container">
-    <div class="card">
-        <p-toolbar styleClass="p-mb-4">
-            <ng-template pTemplate="left">
-                <button pButton pRipple label="New" icon="pi pi-plus" class="p-button-success p-mr-2"
-                    (click)="openNew()"></button>
-                <!-- <button pButton pRipple label="Delete" icon="pi pi-trash" class="p-button-danger"></button> -->
-            </ng-template>
-        </p-toolbar>
+  <div class="card">
+    <p-toolbar styleClass="p-mb-4">
+      <ng-template pTemplate="left">
+        <button pButton pRipple label="New" icon="pi pi-plus" class="p-button-success p-mr-2"
+          (click)="openNew()"></button>
+        <!-- <button pButton pRipple label="Delete" icon="pi pi-trash" class="p-button-danger"></button> -->
+      </ng-template>
+    </p-toolbar>
 
-        <p-table #dt [lazy]="true" [loading]="loading" (onLazyLoad)="loadTests($event)" [value]="covidTestsData"
-            [rows]="10" [paginator]="true" [totalRecords]="totalRecords" [globalFilterFields]="[
+    <p-table #dt [lazy]="true" [loading]="loading" (onLazyLoad)="loadTests($event)" [value]="covidTestsData" [rows]="10"
+      [paginator]="true" [totalRecords]="totalRecords" [globalFilterFields]="[
         'name',
         'country.name',
         'representative.name',
         'status'
       ]" responsiveLayout="scroll" [(selection)]="selectedTest" [rowHover]="true" dataKey="id"
-            [rowsPerPageOptions]="[10, 25, 50]"
-            currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-            [showCurrentPageReport]="true">
-            <ng-template pTemplate="caption">
-                <div class="p-d-flex p-ai-center p-jc-between">
-                    <h5 class="p-m-0">Manage Products</h5>
-                    <span class="p-input-icon-left">
-                        <i class="pi pi-search"></i>
-                        <input pInputText type="text" (input)="searchCovidTest($event)" placeholder="Search..." />
-                    </span>
-                </div>
-            </ng-template>
-            <ng-template pTemplate="header">
-                <tr>
-                    <!-- <th style="width: 3rem">
+      [rowsPerPageOptions]="[10, 25, 50]"
+      currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [showCurrentPageReport]="true">
+      <ng-template pTemplate="caption">
+        <div class="p-d-flex p-ai-center p-jc-between">
+          <h5 class="p-m-0">Covid Test</h5>
+          <span class="p-input-icon-left">
+            <i class="pi pi-search"></i>
+            <input pInputText type="text" (input)="searchCovidTest($event)" placeholder="Search..." />
+          </span>
+        </div>
+      </ng-template>
+      <ng-template pTemplate="header">
+        <tr>
+          <!-- <th style="width: 3rem">
                         <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
                     </th> -->
-                    <th pSortableColumn="name">
-                        Name <p-sortIcon field="name"></p-sortIcon>
-                    </th>
-                    <th>Date of birth <p-sortIcon field="dateOfBirth"></p-sortIcon>
-                    </th>
-                    <th pSortableColumn="emailOrTelephone">
-                        Email or Telephone
-                        <p-sortIcon field="emailOrTelephone"> </p-sortIcon>
-                    </th>
-                    <th pSortableColumn="userName">
-                        Address <p-sortIcon field="address"></p-sortIcon>
-                    </th>
-                    <th pSortableColumn="testResult">
-                        Test Result <p-sortIcon field="testResult"></p-sortIcon>
-                    </th>
-                    <th pSortableColumn="createdAt">
-                        Date <p-sortIcon field="createdAt"></p-sortIcon>
-                    </th>
-                    <th></th>
-                </tr>
-            </ng-template>
-            <ng-template pTemplate="body" let-covidTest>
-                <tr>
-                    <!-- <td>
+          <th pSortableColumn="name">
+            Name <p-sortIcon field="name"></p-sortIcon>
+          </th>
+          <th pSortableColumn="createdAt">
+            Date <p-sortIcon field="createdAt"></p-sortIcon>
+          </th>
+          <th pSortableColumn="testResult">
+            Test Result <p-sortIcon field="testResult"></p-sortIcon>
+          </th>
+          <!-- <th pSortableColumn="dateOfBirth">Date of birth <p-sortIcon field="dateOfBirth"></p-sortIcon>
+                    </th> -->
+          <th pSortableColumn="emailOrTelephone">
+            Email or Telephone
+            <p-sortIcon field="emailOrTelephone"> </p-sortIcon>
+          </th>
+          <th pSortableColumn="address">
+            Address <p-sortIcon field="address"></p-sortIcon>
+          </th>
+          <th>Date of birth</th>
+          <th></th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-covidTest>
+        <tr>
+          <!-- <td>
                         <p-tableCheckbox [value]="covidTest"></p-tableCheckbox>
                     </td> -->
-                    <td>{{ covidTest.name }}</td>
-                    <td>{{ covidTest.dateOfBirth }}</td>
-                    <td>{{ covidTest.emailOrTelephone }}</td>
-                    <td>{{ covidTest.address }}</td>
-                    <td>
-                        <span [class]="
-                'covid-status-badge status-' +
-                (covidTest.testResult ? 'positive' : 'negative')
+          <td>{{ covidTest.name }}</td>
+          <td>{{ covidTest.createdAt | date: "dd/MM/yyyy HH:mm:ss" }}</td>
+          <td>
+            <span [class]="
+                'covid-status-badge status-' + covidTest.testResult
               ">{{ covidTest.testResult ? "positive" : "negative" }}</span>
-                    </td>
+          </td>
 
-                    <td>{{ covidTest.createdAt | date: "dd/MM/yyyy" }}</td>
-                    <td>
-                        <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success p-mr-2"
-                            (click)="editTest(covidTest)"></button>
-                        <!-- <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" ></button> -->
-                    </td>
-                </tr>
-            </ng-template>
-            <!-- <ng-template pTemplate="summary">
+          <td>{{ covidTest.emailOrTelephone }}</td>
+          <td>{{ covidTest.address }}</td>
+          <td>{{ covidTest.dateOfBirth }}</td>
+          <td class="d-flex">
+            <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success p-mr-2 mr-2"
+              (click)="editTest(covidTest)"></button>
+            <button pButton pRipple icon="pi pi-download" class="p-button-rounded p-button-info p-mr-2 mr-2"
+              (click)="confirmation('download', covidTest.uuid)"></button>
+            <button pButton pRipple icon="pi pi-envelope" class="p-button-rounded p-button-warning p-mr-2"
+              (click)="confirmation('mail', covidTest.uuid)"></button>
+            <!-- <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" ></button> -->
+          </td>
+        </tr>
+      </ng-template>
+      <!-- <ng-template pTemplate="summary">
                 <div class="p-d-flex p-ai-center p-jc-between">
                     In total there are {{products ? products.length : 0 }} products.
                 </div>
             </ng-template> -->
-        </p-table>
-    </div>
+    </p-table>
+  </div>
 </div>
 
-<p-dialog [(visible)]="productDialog" [style]="{ width: '80%' }" [header]="editMode ? 'Edit Test' : 'Create New'"
-    [modal]="true" [draggable]="false" styleClass="p-fluid">
-    <ng-template pTemplate="content">
-        <!-- list of employee -->
-        <div class="p-field" *ngIf="!editMode">
-            <label for="name">Employee</label>
-            <p-autoComplete [(ngModel)]="autoCompleteText" [suggestions]="autoCompleteResults"
-                (completeMethod)="autoCompleteSearch($event)" field="name" [dropdown]="true"
-                (onSelect)="handleDropdown($event)">
-                <ng-template let-test pTemplate="item">
-                    <div class="country-item">
-                        <div>{{ test.name }} - {{ test.updatedAt }}</div>
-                    </div>
-                </ng-template>
-            </p-autoComplete>
+<p-dialog [(visible)]="productDialog" (onHide)="closeDialog()" [style]="{ width: '90%' }"
+  [header]="editMode ? 'Edit Test' : 'Create New'" [modal]="true" [draggable]="false" styleClass="p-fluid">
+  <ng-template pTemplate="content">
+    <!-- list of employee -->
+    <div class="p-field mb-3" *ngIf="!editMode">
+      <label for="name">Search for Employee</label>
+      <p-autoComplete [(ngModel)]="autoCompleteText" [suggestions]="autoCompleteResults"
+        (completeMethod)="autoCompleteSearch($event)" field="name" [dropdown]="true"
+        (onSelect)="handleDropdown($event)">
+        <ng-template let-test pTemplate="item">
+          <div class="country-item">
+            <div>{{ test.name }} - {{ test.updatedAt }}</div>
+          </div>
+        </ng-template>
+      </p-autoComplete>
+    </div>
+
+    <form autocomplete="off" [formGroup]="formCovidTest" (ngSubmit)="saveCovidTest()">
+      <div class="row">
+        <div class="col-lg-6">
+          <div class="p-field p-mb-1">
+            <label for="description">First Name and Last Name</label>
+            <div class="p-inputgroup">
+              <span class="p-inputgroup-addon"><i class="pi pi-user"></i></span>
+              <input type="text" [attr.disabled]="selectedEmployee || editMode ? '' : null" formControlName="name"
+                pInputText required autofocus placeholder="Name">
+            </div>
+          </div>
         </div>
+        <div class="col-lg-6">
+          <div class="p-field p-mb-1">
+            <label for="description">Date of birth</label>
+            <div class="p-field date-mask-input">
+              <span class="p-inputgroup-addon"><i class="pi pi-calendar"></i></span>
+              <p-inputMask mask="99/99/9999" [disabled]="selectedEmployee || editMode" formControlName="dateOfBirth"
+                placeholder="21.12.1990" slotChar="dd.mm.yyyy">
+              </p-inputMask>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="p-field p-mb-1">
+        <label for="description">Address</label>
+        <div class="p-inputgroup">
+          <span class="p-inputgroup-addon"><i class="pi pi-compass"></i></span>
+          <input type="text" formControlName="address" [attr.disabled]="selectedEmployee || editMode ? '' : null"
+            pInputText required autofocus placeholder="Address">
+        </div>
+      </div>
+      <div class="p-field p-mb-1">
+        <label for="description">Email or phone</label>
+        <div class="p-inputgroup">
+          <span class="p-inputgroup-addon"><i class="pi pi-envelope"></i></span>
+          <input type="text" formControlName="emailOrTelephone"
+            [attr.disabled]="selectedEmployee || editMode ? '' : null" pInputText id="emailOrTelephone" required
+            autofocus placeholder="Email or phone" />
+        </div>
+      </div>
 
-        <form autocomplete="off" [formGroup]="formCovidTest" (ngSubmit)="saveCovidTest()">
-            <div class="p-field p-mb-1">
-                <label for="description">Name</label>
-                <div class="p-inputgroup">
-                    <span class="p-inputgroup-addon"><i class="pi pi-user"></i></span>
-                    <input type="text" [attr.disabled]="selectedEmployee || editMode ? '' : null" formControlName="name"
-                        pInputText required autofocus placeholder="Name">
-                </div>
+      <div class="p-field p-mb-1 row">
+        <div class="col-12">
+          <label for="time">Time</label>
+        </div>
+        <div class="col-7">
+          <p-calendar formControlName="createdTest" [disabled]="dateLock" [showIcon]="true" dateFormat="dd.mm.yy"
+            [showTime]="true" [showSeconds]="true" inputId="time">
+          </p-calendar>
+        </div>
+        <div class="col-2 d-flex align-items-center">
+          <button type="button" pButton pRipple label="Now" [disabled]="dateLock" (click)="dateNow()"
+            class="p-button-outlined"></button>
+          <!-- <button type="button" pButton pRipple [label]="dateLock ? 'Unlock' : 'Lock'"
+                            (click)="dateDisabled()" [icon]="dateLock ? 'pi pi-lock' : 'pi pi-unlock'"
+                            class="p-button-text"></button> -->
+        </div>
+        <div class="col-2 d-flex align-items-center">
+          <label class="mb-0 mr-2">Unlock</label>
+          <p-inputSwitch (onChange)="dateDisabled()" class="d-flex"></p-inputSwitch>
+        </div>
+      </div>
+      <div class="p-field p-mb-1">
+        <label for="inventoryStatus">Covid Test Status</label>
+        <p-dropdown inputId="inventoryStatus" [options]="statuses" formControlName="testResult" placeholder="Select">
+          <ng-template let-option pTemplate="item">
+            <span [class]="'covid-status-badge status-' + option.value">{{
+              option.label
+              }}</span>
+          </ng-template>
+        </p-dropdown>
+      </div>
+      <div class="mt-3">
+        <p-accordion>
+          <p-accordionTab header="Additional info">
+            <div class="p-field">
+              <label for="description">Message</label>
+              <textarea id="description" formControlName="internalMessage" pInputTextarea rows="3" cols="20"></textarea>
             </div>
-            <div class="p-field p-mb-1">
-                <label for="description">Address</label>
-                <div class="p-inputgroup">
-                    <span class="p-inputgroup-addon"><i class="pi pi-compass"></i></span>
-                    <input type="text" formControlName="address"
-                        [attr.disabled]="selectedEmployee || editMode ? '' : null" pInputText required autofocus
-                        placeholder="Address">
-                </div>
-            </div>
-            <div class="p-field p-mb-1">
-                <label for="description">Date of birth</label>
-                <div class="p-field date-mask-input">
-                    <span class="p-inputgroup-addon"><i class="pi pi-calendar"></i></span>
-                    <p-inputMask mask="99/99/9999" [disabled]="selectedEmployee || editMode" formControlName=""
-                        placeholder="21.12.1990" slotChar="dd.mm.yyyy">
-                    </p-inputMask>
-                </div>
-            </div>
-            <div class="p-field p-mb-1">
-                <label for="description">Email or phone</label>
-                <div class="p-inputgroup">
-                    <span class="p-inputgroup-addon"><i class="pi pi-envelope"></i></span>
-                    <input type="text" formControlName="emailOrTelephone"
-                        [attr.disabled]="selectedEmployee || editMode ? '' : null" pInputText id="emailOrTelephone"
-                        required autofocus placeholder="Email or phone" />
-                </div>
-            </div>
+          </p-accordionTab>
+        </p-accordion>
+      </div>
+    </form>
+  </ng-template>
 
-            <div class="p-fluid p-formgrid p-grid">
-                <div class="p-field p-col-6">
-                    <label for="inventoryStatus">Covid Test Status</label>
-                    <p-dropdown inputId="inventoryStatus" [options]="statuses" formControlName="testResult"
-                        placeholder="Select">
-                        <ng-template let-option pTemplate="item">
-                            <span [class]="'covid-status-badge status-' + option.value">{{
-                                option.label
-                                }}</span>
-                        </ng-template>
-                    </p-dropdown>
-                </div>
-                <div class="p-field p-col-6">
-                    <div class="p-field">
-                        <div class="p-col-6">
-                            <label for="time">Time</label>
-                            <p-calendar formControlName="createdTest" [disabled]="dateLock" [showIcon]="true"
-                                dateFormat="dd.mm.yy" [showTime]="true" [showSeconds]="true" inputId="time">
-                            </p-calendar>
-                        </div>
-                        <div class="p-col-6">
-                            <button type="button" pButton pRipple label="Now" [disabled]="dateLock" (click)="dateNow()"
-                                icon="pi pi-times" class="p-button-text"></button>
-                            <label>Unlock</label>
-                            <p-inputSwitch (onChange)="dateDisabled()"></p-inputSwitch>
-                            <!-- <button type="button" pButton pRipple [label]="dateLock ? 'Unlock' : 'Lock'"
-                                    (click)="dateDisabled()" [icon]="dateLock ? 'pi pi-lock' : 'pi pi-unlock'"
-                                    class="p-button-text"></button> -->
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <p-accordion>
-                <p-accordionTab header="Additional info">
-                    <div class="p-field">
-                        <label for="description">Message</label>
-                        <textarea id="description" formControlName="internalMessage" pInputTextarea rows="3"
-                            cols="20"></textarea>
-                    </div>
-                </p-accordionTab>
-            </p-accordion>
-
-        </form>
-    </ng-template>
-
-    <ng-template pTemplate="footer">
-        <button type="button" (click)="closeDialog()" pButton pRipple label="Cancel" icon="pi pi-times"
-            class="p-button-text"></button>
-        <button type="button" [disabled]="!formCovidTest.valid" pButton pRipple (click)="saveCovidTest()" label="Save"
-            icon="pi pi-check" class="p-button-text"></button>
-    </ng-template>
+  <ng-template pTemplate="footer">
+    <button type="button" (click)="closeDialog()" pButton pRipple label="Cancel" icon="pi pi-times"
+      class="p-button-raised p-button-warning p-button-text"></button>
+    <button type="button" [disabled]="!formCovidTest.valid" pButton pRipple (click)="saveCovidTest()" label="Save"
+      icon="pi pi-check" class="p-button-raised p-button-text"></button>
+  </ng-template>
 </p-dialog>
+
+<p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000" rejectButtonStyleClass="p-button-text">
+</p-confirmDialog>
 
 <router-outlet></router-outlet>

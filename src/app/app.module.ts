@@ -12,12 +12,13 @@ import { HomeComponent } from "./home";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { AvatarModule } from "primeng/avatar";
 import { MenubarModule } from "primeng/menubar";
-import { MenuModule } from 'primeng/menu';
+import { MenuModule } from "primeng/menu";
 import { ButtonModule } from "primeng/button";
-import { MessagesModule } from 'primeng/messages';
-import { MessageModule } from 'primeng/message';
-import { ToastModule } from 'primeng/toast';
-import { MessageService } from 'primeng/api';
+import { MessagesModule } from "primeng/messages";
+import { MessageModule } from "primeng/message";
+import { ToastModule } from "primeng/toast";
+import { MessageService } from "primeng/api";
+import { HashLocationStrategy, LocationStrategy } from "@angular/common";
 
 @NgModule({
   imports: [
@@ -30,15 +31,15 @@ import { MessageService } from 'primeng/api';
     ButtonModule,
     AvatarModule,
     MessagesModule,
-        MessageModule,
-        ToastModule,
+    MessageModule,
+    ToastModule,
   ],
   declarations: [AppComponent, HomeComponent],
   providers: [
     MessageService,
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
-
+    { provide: LocationStrategy, useClass: HashLocationStrategy },
     // provider used to create fake backend
     // fakeBackendProvider,
   ],

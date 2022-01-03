@@ -45,7 +45,7 @@ a {
 .bg-gradient-danger {
   background: linear-gradient(87deg, #f5365c 0, #f56036 100%) !important;
   position: relative;
-  padding-top: 5rem;
+  padding-top: 6rem;
   padding-bottom: 16rem;
 
   .container {
@@ -120,7 +120,10 @@ a {
 
   @media screen and (max-width: 960px) {
     .p-menubar-root-list {
-      p-menuitem > .p-menuitem-link {
+      .p-menuitem > .p-menuitem-link {
+        padding: 1rem;
+        margin: 0.4rem 0;
+
         .p-menuitem-icon,
         .p-menuitem-text,
         .p-submenu-icon {
@@ -169,4 +172,12 @@ a {
 
 .p-mb-1 {
   margin-bottom: 1em;
+}
+
+@media screen and (max-width: 992px) {
+  .p-paginator .p-paginator-current {
+    display: block;
+    width: 100%;
+    text-align: center;
+  }
 }

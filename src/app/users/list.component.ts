@@ -11,7 +11,10 @@ import {
   MessageService,
 } from "primeng/api";
 
-@Component({ templateUrl: "list.component.html" })
+@Component({
+  templateUrl: "list.component.html",
+  styleUrls: ["./users.component.scss"],
+})
 export class ListComponent implements OnInit {
   users: User[] | undefined;
   value: Date = new Date();

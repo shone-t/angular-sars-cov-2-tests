@@ -4,7 +4,12 @@ import { Observable } from "rxjs";
 import { Component, OnInit } from "@angular/core";
 // import { CovidTestsService } from "../_services";
 import { CovidTestsService } from "../_services/covidTest.sevice";
-import { LazyLoadEvent } from "primeng/api";
+import {
+  ConfirmationService,
+  ConfirmEventType,
+  LazyLoadEvent,
+  MessageService,
+} from "primeng/api";
 import { CandidatesService } from "../_services/candidates.service";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { CovidTest } from "../_models";
@@ -41,7 +46,9 @@ export class CovidTestsComponent implements OnInit {
     private covidTestService: CovidTestsService,
     private employees: CandidatesService,
     private _formBuilder: FormBuilder,
-    private alertService: AlertService
+    private alertService: AlertService,
+    private confirmationService: ConfirmationService,
+    private messageService: MessageService
   ) {
     this.formCovidTest = this._formBuilder.group({
       uuid: [""],
@@ -50,8 +57,9 @@ export class CovidTestsComponent implements OnInit {
       dateOfBirth: ["", Validators.required],
       emailOrTelephone: ["", [Validators.required, Validators.email]],
       idUser: [""],
+      // idEmployee: [""],
       userName: [""],
-      testResult: [true, Validators.required],
+      testResult: ["", Validators.required],
       createdTest: [new Date(), Validators.required],
       internalMessage: [""],
     });
@@ -83,6 +91,7 @@ export class CovidTestsComponent implements OnInit {
   closeDialog(): void {
     this.hideDialog();
     this.selectedEmployee = false;
+    this.autoCompleteText = [];
     this.formCovidTest.reset();
   }
 
@@ -116,7 +125,6 @@ export class CovidTestsComponent implements OnInit {
   editTest(event: any) {
     this.editMode = true;
     this.productDialog = true;
-    console.log(event);
     this.selectedEmployee = false;
     const obj: CovidTest = {
       uuid: event.uuid,
@@ -125,6 +133,7 @@ export class CovidTestsComponent implements OnInit {
       dateOfBirth: event.dateOfBirth,
       emailOrTelephone: event.emailOrTelephone,
       idUser: event.idUser,
+      // idEmployee: event.idEmployee,
       userName: event.userName,
       testResult: event.testResult,
       createdTest: new Date(event.createdTest),
@@ -145,8 +154,6 @@ export class CovidTestsComponent implements OnInit {
         sortOrder = "ASC";
       }
 
-      console.log(this.searchText);
-
       this.covidTestService
         .getAllTest(
           this.filterValue.first,
@@ -166,9 +173,8 @@ export class CovidTestsComponent implements OnInit {
 
   autoCompleteSearch(event: any) {
     this.autoCompleteResults = [];
-    console.log("this.listOfEmployees", this.listOfEmployees);
     this.listOfEmployees.filter((item) => {
-      item.name.indexOf(event.query) >= 0
+      item.name.toLowerCase().indexOf(event.query.toLowerCase()) >= 0
         ? this.autoCompleteResults.push(item)
         : null;
     });
@@ -183,8 +189,9 @@ export class CovidTestsComponent implements OnInit {
       dateOfBirth: event.dateOfBirth,
       emailOrTelephone: event.emailOrTelephone,
       idUser: event.idUser,
+      // idEmployee: event.uuid,
       userName: event.userName,
-      testResult: false,
+      testResult: undefined,
       createdTest: new Date(),
     };
     this.formCovidTest.patchValue(obj);
@@ -194,8 +201,18 @@ export class CovidTestsComponent implements OnInit {
     if (this.formCovidTest.invalid) {
       return;
     }
-    this.formCovidTest.get("idUser")?.patchValue("23213");
-    this.formCovidTest.get("userName")?.patchValue("qwwdqdwq");
+    const userFromStorage = localStorage.getItem("user");
+    if (userFromStorage) {
+      const userFromStorageObj = JSON.parse(userFromStorage);
+
+      this.formCovidTest.get("idUser")?.patchValue(userFromStorageObj?.uuid);
+      this.formCovidTest
+        .get("userName")
+        ?.patchValue(userFromStorageObj?.username);
+    } else {
+      this.alertService.error("User doesnt exists");
+      return;
+    }
     this.covidTestService
       .saveTest(this.formCovidTest.value, this.editMode)
       .pipe(take(1))
@@ -222,5 +239,53 @@ export class CovidTestsComponent implements OnInit {
 
   dateNow(): void {
     this.formCovidTest.get("createdTest")?.patchValue(new Date());
+  }
+
+  printCovidTest(id: string) {
+    console.log("printCovidTest", id);
+  }
+
+  sendMailAgain(id: string) {
+    console.log("sandMailAgain", id);
+  }
+
+  confirmation(type: string, id: string) {
+    this.confirmationService.confirm({
+      message: `Do you want to ${
+        type === "download" ? "download" : "send mail"
+      }?`,
+      header: `${type === "download" ? "Download" : "Send mail"} Confirmation`,
+      icon: "pi pi-info-circle",
+      accept: () => {
+        this.messageService.add({
+          severity: "info",
+          summary: "Confirmed",
+          detail: "Record deleted",
+        });
+        if (type === "download") {
+          this.printCovidTest(id);
+        } else if (type === "mail") {
+          this.sendMailAgain(id);
+        }
+      },
+      reject: (type: any) => {
+        switch (type) {
+          case ConfirmEventType.REJECT:
+            this.messageService.add({
+              severity: "error",
+              summary: "Rejected",
+              detail: "You have rejected",
+            });
+            break;
+          case ConfirmEventType.CANCEL:
+            this.messageService.add({
+              severity: "warn",
+              summary: "Cancelled",
+              detail: "You have cancelled",
+            });
+            break;
+        }
+      },
+    });
   }
 }

@@ -9,16 +9,25 @@ export class AppComponent {
   user: User | undefined;
   items: MenuItem[];
   userItems: MenuItem[];
-  initials: String;
-  fullName: String;
+  initials: String = "";
+  fullName: String = "";
 
-  constructor(private accountService: AccountService,  private alertService: AlertService) {
-    this.initials = JSON.parse(localStorage.getItem("user")!)
-      .name.split(" ")
-      .map((n: any) => n[0])
-      .join("")
-      .toUpperCase();
-    this.fullName = JSON.parse(localStorage.getItem("user")!).name;
+  constructor(
+    private accountService: AccountService,
+    private alertService: AlertService
+  ) {
+    this.initials =
+      localStorage.getItem("user") === null
+        ? ""
+        : JSON.parse(localStorage.getItem("user")!)
+            .name.split(" ")
+            .map((n: any) => n[0])
+            .join("")
+            .toUpperCase();
+    this.fullName =
+      localStorage.getItem("user") === null
+        ? ""
+        : JSON.parse(localStorage.getItem("user")!).name;
     this.accountService.user.subscribe((x) => (this.user = x));
 
     this.userItems = [
@@ -50,11 +59,30 @@ export class AppComponent {
         icon: "pi pi-fw pi-user",
         routerLink: "/users",
       },
-      
     ];
   }
 
   logout() {
     this.accountService.logout();
+  }
+
+  public localStorageItem(id: string): string | null {
+    return localStorage.getItem(id);
+  }
+
+  public getInitials(): string | null {
+    return localStorage.getItem("user") === null
+      ? ""
+      : JSON.parse(localStorage.getItem("user")!)
+          .name.split(" ")
+          .map((n: any) => n[0])
+          .join("")
+          .toUpperCase();
+  }
+
+  public getFullName(): string | null {
+    return localStorage.getItem("user") === null
+      ? ""
+      : JSON.parse(localStorage.getItem("user")!).name;
   }
 }

@@ -8,16 +8,18 @@
   </div>
 </nav> -->
 <div class="main-content">
-  <p-menubar [model]="items">
-    <button class="p-button-secondary" type="button" pButton (click)="menu.toggle($event)"> {{fullName}} <p-avatar
-      label="{{initials}}" class="pl-3" [style]="{'background-color':'#2196F3', 'color': '#ffffff'}" shape="circle"></p-avatar> </button>
-  <p-menu #menu [popup]="true" [model]="userItems" ></p-menu>
-</p-menubar>
-  
+  <p-menubar [model]="items" *ngIf="localStorageItem('user')">
+    <button class="p-button-secondary" type="button" pButton (click)="menu.toggle($event)"> {{getFullName()}} <p-avatar
+        label="{{getInitials()}}" class="pl-3" [style]="{'background-color':'#2196F3', 'color': '#ffffff'}"
+        shape="circle">
+      </p-avatar> </button>
+    <p-menu #menu [popup]="true" [model]="userItems"></p-menu>
+  </p-menubar>
+
   <div>
     <div class="bg-gradient-danger">
       <div class="container">
-        <h3>Welcome</h3>
+        <h3>MPT Testzentrum</h3>
       </div>
       <div _ngcontent-c8="" class="separator separator-bottom separator-skew zindex-100"><svg _ngcontent-c8=""
           preserveAspectRatio="none" version="1.1" viewBox="0 0 2560 100" x="0" xmlns="http://www.w3.org/2000/svg"

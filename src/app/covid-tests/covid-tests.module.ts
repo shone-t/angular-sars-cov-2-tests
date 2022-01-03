@@ -3,7 +3,6 @@ import { CommonModule } from "@angular/common";
 
 import { CovidTestsRoutingModule } from "./covid-tests-routing.module";
 import { CovidTestsComponent } from "./covid-tests.component";
-import { FormComponent } from "./form/form.component";
 import { ToastModule } from "primeng/toast";
 import { MessageService } from "primeng/api";
 import { ButtonModule } from "primeng/button";
@@ -23,9 +22,11 @@ import { CalendarModule } from "primeng/calendar";
 import { InputMaskModule } from "primeng/inputmask";
 import { InputSwitchModule } from "primeng/inputswitch";
 import { AccordionModule } from "primeng/accordion";
+import { ConfirmDialogModule } from "primeng/confirmdialog";
+import { ConfirmationService } from "primeng/api";
 
 @NgModule({
-  declarations: [CovidTestsComponent, FormComponent],
+  declarations: [CovidTestsComponent],
   imports: [
     CommonModule,
     CovidTestsRoutingModule,
@@ -46,7 +47,13 @@ import { AccordionModule } from "primeng/accordion";
     InputMaskModule,
     InputSwitchModule,
     AccordionModule,
+    ConfirmDialogModule,
   ],
-  providers: [MessageService, CovidTestsService, CandidatesService],
+  providers: [
+    MessageService,
+    CovidTestsService,
+    CandidatesService,
+    ConfirmationService,
+  ],
 })
 export class CovidTestsModule {}
