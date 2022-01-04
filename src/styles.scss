@@ -1,9 +1,9 @@
 /* You can add global styles to this file, and also import other style files */
 body {
-  background-color: #f6f7fa;
+  // background-color: #f6f7fa;
 
   &.account-page {
-    background-color: #172b4d;
+    //background-color: #172b4d;
 
     .bg-gradient-danger {
       .separator {
@@ -42,8 +42,22 @@ a {
   box-sizing: content-box;
 }
 
+.top-0 {
+  top: 0 !important;
+}
+.right-0 {
+  right: 0 !important;
+}
+.bottom-0 {
+  bottom: 0 !important;
+}
+.left-0 {
+  left: 0 !important;
+}
+
 .bg-gradient-danger {
-  background: linear-gradient(87deg, #f5365c 0, #f56036 100%) !important;
+  // background: linear-gradient(87deg, #f5365c 0, #f56036 100%) !important;
+  background-image: "../src/assets/showcase/images/abstract-bg-4.svg";
   position: relative;
   padding-top: 6rem;
   padding-bottom: 16rem;
@@ -97,7 +111,7 @@ a {
     .p-menuitem-icon,
     .p-menuitem-text,
     .p-submenu-icon {
-      color: white;
+      color: #64748B;
     }
   }
 
@@ -106,7 +120,7 @@ a {
     width: 3em;
 
     i.pi {
-      color: white;
+      color: #64748B;
       font-size: 1.5em;
     }
 
