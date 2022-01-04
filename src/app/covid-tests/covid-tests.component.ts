@@ -243,10 +243,30 @@ export class CovidTestsComponent implements OnInit {
 
   printCovidTest(id: string) {
     console.log("printCovidTest", id);
+    this.covidTestService
+      .printAndDownloadTest(id)
+      .pipe(take(1))
+      .subscribe({
+        next: (file) => {
+          const blob = new Blob([file], { type: "application/pdf" });
+          const downloadUrl = window.URL.createObjectURL(blob);
+          const link = document.createElement("a");
+          link.href = downloadUrl;
+          link.download = "TestPdf.pdf";
+          link.click();
+        },
+      });
   }
 
   sendMailAgain(id: string) {
     console.log("sandMailAgain", id);
+    this.covidTestService
+      .sendMailAgain(id)
+      .pipe(take(1))
+      .subscribe({
+        next: (res) => this.alertService.success("Email send..."),
+        error: (err) => this.alertService.error(err),
+      });
   }
 
   confirmation(type: string, id: string) {

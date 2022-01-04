@@ -60,4 +60,21 @@ export class CovidTestsService {
         .pipe(tap((res) => console.log("service res:", res)));
     }
   }
+
+  // /download-test
+
+  printAndDownloadTest(uuid: string): Observable<any> {
+    return this.http.get(
+      `${environment.apiUrl}/covid-tests/download-test?id=${uuid}`,
+      {
+        responseType: "blob",
+      }
+    );
+  }
+
+  sendMailAgain(uuid: string): Observable<any> {
+    return this.http.get(
+      `${environment.apiUrl}/covid-tests/resend-email?id=${uuid}`
+    );
+  }
 }
