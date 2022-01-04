@@ -7,7 +7,7 @@ import { AccountService, AlertService } from "../_services";
 
 @Component({
   templateUrl: "register.component.html",
-  styleUrls: ["./layout.component.scss"],
+  styleUrls: ["./account.component.scss"],
 })
 export class RegisterComponent implements OnInit {
   form: FormGroup;
@@ -24,8 +24,9 @@ export class RegisterComponent implements OnInit {
     this.form = this.formBuilder.group({
       name: ["", Validators.required],
       username: ["", Validators.required],
-      email: ["", Validators.required, Validators.email],
-      password: ["", [Validators.required, Validators.minLength(6)]],
+      email: ["", [Validators.required, Validators.email]],
+      password: ["", [Validators.required, Validators.minLength(8)]],
+      confirmPassword: ["", [Validators.required, Validators.minLength(8)]]
     });
   }
 

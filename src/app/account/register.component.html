@@ -1,4 +1,4 @@
-﻿<div class="card">
+﻿<!-- <div class="card">
     <h4 class="card-header">Register</h4>
     <div class="card-body">
         <form [formGroup]="form" (ngSubmit)="onSubmit()">
@@ -45,4 +45,125 @@
             </div>
         </form>
     </div>
+</div> -->
+
+
+<div class="row justify-content-center">
+
+    <!-- Card -->
+    <div class="card card-lg mb-5 w-50" style="min-width: 478px;">
+        <div class="card-body">
+            <!-- Form -->
+            <form class="js-validate" novalidate="novalidate" [formGroup]="form" (ngSubmit)="onSubmit()">
+                <div class="text-center">
+                    <div class="mb-5">
+                        <h1 class="display-4">Create your account</h1>
+                        <p>Already have an account? <a routerLink="../login">Sign in here</a></p>
+                    </div>
+                </div>
+                <form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+                    <div class="p-grid p-fluid">
+
+                        <div class="js-form-message form-group">
+                            <label class="input-label" for="name">Your full name</label>
+
+                            <input type="text" [ngClass]="{ 'is-invalid': submitted && f['name'].errors }"
+                                formControlName="name" class="form-control form-control-lg" name="name" id="name"
+                                placeholder="Enter full name"
+                                [ngClass]="{ 'is-invalid': submitted && f['name'].errors }" />
+                            <div *ngIf="submitted && f['name'].errors" class="invalid-feedback">
+                                <div *ngIf="f['name'].errors['required']">Please enter your name.</div>
+                            </div>
+                        </div>
+
+
+                        <div class="js-form-message form-group">
+                            <label class="input-label" for="email">Your email</label>
+
+                            <input type="text" [ngClass]="{ 'is-invalid': submitted && f['email'].errors }"
+                                formControlName="email" class="form-control form-control-lg" name="email" id="email"
+                                placeholder="Markwilliams@example.com"
+                                [ngClass]="{ 'is-invalid': submitted && f['email'].errors }" />
+                            <div *ngIf="submitted && f['email'].errors" class="invalid-feedback">
+                                <div *ngIf="f['email'].errors['required']">Email is required</div>
+                                <div *ngIf="f['email'].invalid && !f['email'].errors['required']">Email is invalid</div>
+                            </div>
+                        </div>
+
+                        <div class="js-form-message form-group">
+                            <label class="input-label" for="username">Your username</label>
+
+                            <input type="text" [ngClass]="{ 'is-invalid': submitted && f['username'].errors }"
+                                formControlName="username" class="form-control form-control-lg" name="email"
+                                id="username" placeholder="Enter username"
+                                [ngClass]="{ 'is-invalid': submitted && f['username'].errors }" />
+                            <div *ngIf="submitted && f['username'].errors" class="invalid-feedback">
+                                <div *ngIf="f['username'].errors['required']">Username is required</div>
+                            </div>
+                        </div>
+
+                        <div class="js-form-message form-group">
+                            <label class="input-label w-100" for="signupSrPassword">
+                                <span class="d-flex justify-content-between align-items-center">
+                                    Password
+                                </span>
+                            </label>
+
+                            <p-password [toggleMask]="true" formControlName="password"
+                                styleClass="p-password p-component p-inputwrapper p-input-icon-right">
+                                <ng-template pTemplate="header">
+                                    <h6>Pick a password</h6>
+                                </ng-template>
+                                <ng-template pTemplate="footer">
+
+                                    <p class="p-mt-2">Suggestions</p>
+                                    <ul class="p-pl-2 p-ml-2 p-mt-0" style="line-height: 1.5">
+                                        <li>At least one lowercase</li>
+                                        <li>At least one uppercase</li>
+                                        <li>At least one numeric</li>
+                                        <li>Minimum 8 characters</li>
+                                    </ul>
+                                </ng-template>
+                            </p-password>
+
+                        </div>
+
+                        <div class="js-form-message form-group">
+                            <label class="input-label w-100" for="confirmPassword">
+                                <span class="d-flex justify-content-between align-items-center">
+                                    Confirm password
+                                </span>
+                            </label>
+
+                            <p-password [feedback]="false" [toggleMask]="true" formControlName="confirmPassword"
+                                styleClass="p-password p-component p-inputwrapper p-input-icon-right" 
+                                [ngClass]="{ 'is-invalid': f['password'].value != f['confirmPassword'].value }">
+
+                                
+                            </p-password>
+                            <div *ngIf="f['confirmPassword'].dirty && f['password'].value != f['confirmPassword'].value" class="invalid-feedback">
+                                <div *ngIf="f['password'].value != f['confirmPassword'].value">Password are not same</div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="form-group d-flex justify-content-between">
+                        <button pButton pRipple type="submit" [disabled]="loading" [loading]="loading"
+                            label="Create an account" class="p-button-raised btn-block"></button>
+                    </div>
+
+                    <div class="text-center mt-2">
+                        <a class="btn btn-link" routerLink="../login">
+                            <i class="pi pi-angle-left"></i> Back to Sign in
+                        </a>
+                    </div>
+                </form>
+
+            </form>
+            <!-- End Form -->
+        </div>
+    </div>
+    <!-- End Card -->
+
 </div>
