@@ -7,7 +7,20 @@
     <a class="nav-item nav-link" (click)="logout()">Logout</a>
   </div>
 </nav> -->
-<div class="main-content">
+
+
+<main id="content" role="main" class="main">
+  <div class="position-fixed top-0 right-0 left-0 bg-img-hero" style="height: 32rem; background-image: url(../assets/showcase/images/abstract-bg-4.svg);">
+    <!-- SVG Bottom Shape -->
+    <figure class="position-absolute right-0 bottom-0 left-0 mb-0">
+      <svg preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 1921 273">
+        <polygon fill="#fff" points="0,273 1921,273 1921,0 "></polygon>
+      </svg>
+    </figure>
+    <!-- End SVG Bottom Shape -->
+  </div>
+
+  <!-- Content -->
   <p-menubar [model]="items" *ngIf="localStorageItem('user')">
     <button class="p-button-secondary" type="button" pButton (click)="menu.toggle($event)"> {{getFullName()}} <p-avatar
         label="{{getInitials()}}" class="pl-3" [style]="{'background-color':'#2196F3', 'color': '#ffffff'}"
@@ -15,17 +28,11 @@
       </p-avatar> </button>
     <p-menu #menu [popup]="true" [model]="userItems"></p-menu>
   </p-menubar>
-
   <div>
     <div class="bg-gradient-danger">
       <div class="container">
-        <h3>MPT Testzentrum</h3>
+        <h3 class="display-4">MPT Testzentrum</h3>
       </div>
-      <div _ngcontent-c8="" class="separator separator-bottom separator-skew zindex-100"><svg _ngcontent-c8=""
-          preserveAspectRatio="none" version="1.1" viewBox="0 0 2560 100" x="0" xmlns="http://www.w3.org/2000/svg"
-          y="0">
-          <polygon _ngcontent-c8="" class="fill-default" points="2560 0 2560 100 0 100"></polygon>
-        </svg></div>
     </div>
 
     <!-- main app container -->
@@ -34,4 +41,6 @@
       <router-outlet></router-outlet>
     </div>
   </div>
-</div>
+  <!-- End Content -->
+</main>
+

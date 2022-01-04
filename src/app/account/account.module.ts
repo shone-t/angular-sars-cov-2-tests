@@ -7,6 +7,7 @@ import { LayoutComponent } from "./layout.component";
 import { LoginComponent } from "./login.component";
 import { RegisterComponent } from "./register.component";
 import { ButtonModule } from "primeng/button";
+import { PasswordModule } from "primeng/password";
 
 @NgModule({
   imports: [
@@ -14,6 +15,7 @@ import { ButtonModule } from "primeng/button";
     ReactiveFormsModule,
     AccountRoutingModule,
     ButtonModule,
+    PasswordModule,
   ],
   declarations: [LayoutComponent, LoginComponent, RegisterComponent],
 })
