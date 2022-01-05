@@ -1,5 +1,4 @@
-﻿
-<div class="row justify-content-center">
+﻿<div class="row justify-content-center">
 
     <!-- Card -->
     <div class="card card-lg mb-5 w-50" style="min-width: 478px;">
@@ -12,7 +11,7 @@
                         <p>Don't have an account yet? <a routerLink="../register">Sign up here</a></p>
                     </div>
                 </div>
-                <form [formGroup]="form" (ngSubmit)="onSubmit()">
+                <form autocomplete="off" [formGroup]="form" (ngSubmit)="onSubmit()">
 
                     <div class="p-grid p-fluid">
 
@@ -28,7 +27,7 @@
                             <label class="input-label w-100" for="signupSrPassword">
                                 <span class="d-flex justify-content-between align-items-center">
                                     Password
-                                    <a class="input-label-secondary">Forgot Password?</a>
+                                    <a routerLink="../forgot" class="input-label-secondary">Forgot Password?</a>
                                 </span>
                             </label>
 

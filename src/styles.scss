@@ -111,7 +111,7 @@ a {
     .p-menuitem-icon,
     .p-menuitem-text,
     .p-submenu-icon {
-      color: #64748B;
+      color: #64748b;
     }
   }
 
@@ -120,7 +120,7 @@ a {
     width: 3em;
 
     i.pi {
-      color: #64748B;
+      color: #64748b;
       font-size: 1.5em;
     }
 
@@ -196,7 +196,15 @@ a {
   }
 }
 
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 768px) and (min-width: 1400px) {
+  .app-container {
+    .container {
+      max-width: 1200px;
+    }
+  }
+}
+
+@media screen and (min-width: 576px) and (max-width: 1200px) {
   .app-container {
     .container {
       max-width: 94%;

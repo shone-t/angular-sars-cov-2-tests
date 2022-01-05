@@ -61,7 +61,7 @@
                         <p>Already have an account? <a routerLink="../login">Sign in here</a></p>
                     </div>
                 </div>
-                <form [formGroup]="form" (ngSubmit)="onSubmit()">
+                <form autocomplete="off" [formGroup]="form" (ngSubmit)="onSubmit()">
 
                     <div class="p-grid p-fluid">
 
@@ -137,13 +137,15 @@
                             </label>
 
                             <p-password [feedback]="false" [toggleMask]="true" formControlName="confirmPassword"
-                                styleClass="p-password p-component p-inputwrapper p-input-icon-right" 
+                                styleClass="p-password p-component p-inputwrapper p-input-icon-right"
                                 [ngClass]="{ 'is-invalid': f['password'].value != f['confirmPassword'].value }">
 
-                                
+
                             </p-password>
-                            <div *ngIf="f['confirmPassword'].dirty && f['password'].value != f['confirmPassword'].value" class="invalid-feedback">
-                                <div *ngIf="f['password'].value != f['confirmPassword'].value">Password are not same</div>
+                            <div *ngIf="f['confirmPassword'].dirty && f['password'].value != f['confirmPassword'].value"
+                                class="invalid-feedback">
+                                <div *ngIf="f['password'].value != f['confirmPassword'].value">Password are not same
+                                </div>
                             </div>
 
                         </div>

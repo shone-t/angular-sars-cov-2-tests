@@ -97,4 +97,10 @@ export class AccountService {
       })
     );
   }
+
+  resetPasswordEmail(email: string) {
+    return this.http.post(`${environment.apiUrl}/users/reset-password-email`, {
+      email,
+    });
+  }
 }
