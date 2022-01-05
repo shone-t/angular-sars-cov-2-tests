@@ -17,7 +17,8 @@
         'status'
       ]" responsiveLayout="scroll" [(selection)]="selectedTest" [rowHover]="true" dataKey="id"
       [rowsPerPageOptions]="[10, 25, 50]"
-      currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [showCurrentPageReport]="true">
+      currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [showCurrentPageReport]="true"
+      sortField="createdTest" [sortOrder]="-1">
       <ng-template pTemplate="caption">
         <div class="p-d-flex p-ai-center p-jc-between">
           <h5 class="p-m-0">Covid Test</h5>
@@ -70,22 +71,25 @@
           <td>{{ covidTest.emailOrTelephone }}</td>
           <td>{{ covidTest.address }}</td>
           <td>{{ covidTest.dateOfBirth }}</td>
-          <td class="d-flex">
-            <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success p-mr-2 mr-2"
-              (click)="editTest(covidTest)"></button>
-            <button pButton pRipple icon="pi pi-download" class="p-button-rounded p-button-info p-mr-2 mr-2"
-              (click)="confirmation('download', covidTest.uuid)"></button>
-            <button pButton pRipple icon="pi pi-envelope" class="p-button-rounded p-button-warning p-mr-2"
-              (click)="confirmation('mail', covidTest.uuid)"></button>
-            <!-- <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" ></button> -->
+          <td>
+            <div class="d-flex">
+              <!-- <p-speedDial [model]="buttonItems" direction="left"></p-speedDial> -->
+              <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success p-mr-2 mr-2"
+                (click)="editTest(covidTest)"></button>
+              <button pButton pRipple icon="pi pi-download" class="p-button-rounded p-button-info p-mr-2 mr-2"
+                (click)="confirmation('download', covidTest.uuid)"></button>
+              <button pButton pRipple icon="pi pi-envelope" class="p-button-rounded p-button-warning p-mr-2"
+                (click)="confirmation('mail', covidTest.uuid)"></button>
+              <!-- <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" ></button> -->
+            </div>
           </td>
         </tr>
       </ng-template>
       <!-- <ng-template pTemplate="summary">
-                <div class="p-d-flex p-ai-center p-jc-between">
-                    In total there are {{products ? products.length : 0 }} products.
-                </div>
-            </ng-template> -->
+        <div class="p-d-flex p-ai-center p-jc-between">
+          In total there are {{covidTestsData ? covidTestsData.length : 0 }} Tests.
+        </div>
+      </ng-template> -->
     </p-table>
   </div>
 </div>

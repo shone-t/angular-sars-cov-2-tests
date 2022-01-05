@@ -5,7 +5,7 @@ export class CovidTest {
   dateOfBirth: string | undefined;
   emailOrTelephone: string | undefined;
   idUser: string | undefined;
-  idEmployee?: string | undefined;
+  employeeId?: string | undefined;
   userName: string | undefined;
   testResult: boolean | undefined;
   createdTest: Date | undefined;

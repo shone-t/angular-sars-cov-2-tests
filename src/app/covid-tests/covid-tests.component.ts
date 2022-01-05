@@ -42,6 +42,27 @@ export class CovidTestsComponent implements OnInit {
   editMode = false;
   lastTableLazyLoadEvent: LazyLoadEvent = {};
 
+  buttonItems = [
+    {
+      icon: "pi pi-pencil",
+      command: () => {
+        // this.editTest(covidTest);
+      },
+    },
+    {
+      icon: "pi pi-download",
+      command: () => {
+        // confirmation("download", covidTest.uuid);
+      },
+    },
+    {
+      icon: "pi pi-envelope",
+      command: () => {
+        // confirmation("mail", covidTest.uuid);
+      },
+    },
+  ];
+
   constructor(
     private covidTestService: CovidTestsService,
     private employees: CandidatesService,
@@ -57,7 +78,7 @@ export class CovidTestsComponent implements OnInit {
       dateOfBirth: ["", Validators.required],
       emailOrTelephone: ["", [Validators.required, Validators.email]],
       idUser: [""],
-      // idEmployee: [""],
+      employeeId: [""],
       userName: [""],
       testResult: ["", Validators.required],
       createdTest: [new Date(), Validators.required],
@@ -92,6 +113,7 @@ export class CovidTestsComponent implements OnInit {
     this.hideDialog();
     this.selectedEmployee = false;
     this.autoCompleteText = [];
+    this.dateLock = true;
     this.formCovidTest.reset();
   }
 
@@ -133,7 +155,7 @@ export class CovidTestsComponent implements OnInit {
       dateOfBirth: event.dateOfBirth,
       emailOrTelephone: event.emailOrTelephone,
       idUser: event.idUser,
-      // idEmployee: event.idEmployee,
+      // employeeId: event.employeeId,
       userName: event.userName,
       testResult: event.testResult,
       createdTest: new Date(event.createdTest),
@@ -189,7 +211,7 @@ export class CovidTestsComponent implements OnInit {
       dateOfBirth: event.dateOfBirth,
       emailOrTelephone: event.emailOrTelephone,
       idUser: event.idUser,
-      // idEmployee: event.uuid,
+      employeeId: event.uuid,
       userName: event.userName,
       testResult: undefined,
       createdTest: new Date(),
