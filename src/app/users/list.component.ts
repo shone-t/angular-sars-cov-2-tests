@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { LazyLoadEvent } from "primeng/api";
 import { first } from "rxjs/operators";
 import { User } from "../_models";
+import { AlertService } from "./../_services/alert.service";
 
 import { AccountService } from "../_services";
 import {
@@ -29,10 +30,13 @@ export class ListComponent implements OnInit {
   usersData: any[] = [];
   formUser: FormGroup;
 
+  lastTableLazyLoadEvent: LazyLoadEvent = {};
+
   constructor(
     private accountService: AccountService,
     private _formBuilder: FormBuilder,
     private confirmationService: ConfirmationService,
+    private alertService: AlertService,
     private messageService: MessageService
   ) {
     this.formUser = this._formBuilder.group({
@@ -40,8 +44,6 @@ export class ListComponent implements OnInit {
       name: ["", Validators.required],
       email: ["", [Validators.required]],
       username: ["", Validators.required],
-      password: ["", Validators.required],
-      confirmPass: ["", Validators.required],
     });
   }
 
@@ -106,6 +108,7 @@ export class ListComponent implements OnInit {
   }
 
   loadUsers(event: any) {
+    this.lastTableLazyLoadEvent = event;
     this.loading = true;
     this.filterValue = event;
     let sortOrder = "";
@@ -168,11 +171,13 @@ export class ListComponent implements OnInit {
       .pipe(first())
       .subscribe({
         next: () => {
-          // this.alertService.success("Update successful");
+          this.alertService.success("Update successful");
+          this.loadUsers(this.lastTableLazyLoadEvent);
+          this.hideDialog();
           // this.router.navigate(["../../"], { relativeTo: this.route });
         },
         error: (error) => {
-          // this.alertService.error(error);
+          this.alertService.error(error);
           this.loading = false;
         },
       });

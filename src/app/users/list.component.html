@@ -121,6 +121,14 @@
             </div>
 
             <div class="p-field p-mb-1">
+                <label for="description">Username</label>
+                <div class="p-inputgroup">
+                    <span class="p-inputgroup-addon"><i class="pi pi-user-edit"></i></span>
+                    <input type="text" formControlName="username" pInputText required autofocus placeholder="Username">
+                </div>
+            </div>
+
+            <div class="p-field p-mb-1">
                 <label for="description">Email</label>
                 <div class="p-inputgroup">
                     <span class="p-inputgroup-addon"><i class="pi pi-envelope"></i></span>
@@ -128,44 +136,16 @@
                 </div>
             </div>
 
-            <div class="p-field p-mb-1">
-                <label for="description">Username</label>
-                <div class="p-inputgroup">
-                    <span class="p-inputgroup-addon"><i class="pi pi-user-edit"></i></span>
-                    <input type="password" formControlName="username" pInputText required autofocus
-                        placeholder="Username">
-                </div>
-            </div>
-
-
-            <div class="p-field p-mb-1">
-                <label for="description">Password</label>
-                <div class="p-inputgroup">
-                    <span class="p-inputgroup-addon"><i class="pi pi-key"></i></span>
-                    <input type="text" formControlName="password" pInputText id="password" required autofocus
-                        placeholder="Password" />
-                    <!-- <p-password formControlName="password" [toggleMask]="true"></p-password> -->
-                </div>
-            </div>
-
-            <div class="p-field p-mb-1">
-                <label for="description">Confirm Password</label>
-                <div class="p-inputgroup">
-                    <span class="p-inputgroup-addon"><i class="pi pi-key"></i></span>
-                    <input type="text" formControlName="confirmPass" pInputText id="confirmPass" required autofocus
-                        placeholder="Confirm Password" />
-                    <!-- <p-password formControlName="confirmPass" [toggleMask]="true"></p-password> -->
-                </div>
-            </div>
         </form>
     </ng-template>
 
     <ng-template pTemplate="footer">
         <button type="button" (click)="hideDialog()" pButton pRipple label="Cancel" icon="pi pi-times"
-            class="p-button-text"></button>
+            class="p-button-raised p-button-warning p-button-text"></button>
         <button type="button"
             [disabled]="!formUser.valid && !(formUser.get('password')?.value !== formUser.get('confirmPass')?.value)"
-            pButton pRipple (click)="saveUser()" label="Save" icon="pi pi-check" class="p-button-text"></button>
+            pButton pRipple (click)="saveUser()" label="Save" icon="pi pi-check"
+            class="p-button-raised p-button-text"></button>
     </ng-template>
 </p-dialog>
 
