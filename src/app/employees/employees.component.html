@@ -53,7 +53,7 @@
                     <!-- <td>
                         <p-tableCheckbox [value]="covidTest"></p-tableCheckbox>
                     </td> -->
-                    <td>{{ covidTest.name }}</td>
+                    <td><a class="text-info" (click)="listDialogShow(covidTest.uuid)">{{ covidTest.name }}</a></td>
                     <td>{{ covidTest.dateOfBirth }}</td>
                     <td>{{ covidTest.emailOrTelephone }}</td>
                     <td>{{ covidTest.address }}</td>
@@ -127,5 +127,47 @@
             class="p-button-raised p-button-warning p-button-text"></button>
         <button type="button" [disabled]="!formEmployee.valid" pButton pRipple (click)="saveEmployee()" label="Save"
             icon="pi pi-check" class="p-button-raised p-button-text"></button>
+    </ng-template>
+</p-dialog>
+
+<p-dialog [(visible)]="listDialog" (onHide)="hideDialog()" [style]="{ width: '90%' }" [header]="'Tests for employee'"
+    [modal]="true" [draggable]="false" styleClass="p-fluid">
+    <ng-template pTemplate="content">
+
+        <p-table #dt [lazy]="true" [loading]="loading" [value]="usersData" [globalFilterFields]="[
+                'name',
+                'username',
+                'email'
+              ]" responsiveLayout="scroll" [(selection)]="selectedTest" [rowHover]="true" dataKey="id"
+            currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+            [showCurrentPageReport]="true">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th>Name</th>
+                    <th>Date</th>
+                    <th>Test Result</th>
+                    <th>Email or Telephone</th>
+                    <th>Address</th>
+                    <th>Date of birth</th>
+                    <th></th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-user>
+                <tr>
+                    <td>{{ user.name }}</td>
+                    <td>{{ user.createdTest | date: "dd/MM/yyyy HH:mm:ss" }}</td>
+                    <td>
+                        <span [class]="
+                                'covid-status-badge status-' + user.testResult
+                              ">{{ user.testResult ? "positive" : "negative" }}</span>
+                    </td>
+                    <td>{{ user.emailOrTelephone }}</td>
+                    <td>{{ user.address }}</td>
+                    <td>{{ user.dateOfBirth }}</td>
+                    <td></td>
+                </tr>
+            </ng-template>
+        </p-table>
+
     </ng-template>
 </p-dialog>

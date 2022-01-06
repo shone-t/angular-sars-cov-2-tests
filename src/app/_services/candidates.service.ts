@@ -49,9 +49,11 @@ export class CandidatesService {
     );
   }
 
-  // getTestsForEmployee(uuid: string): Observable<any> {
-  //   return this.http.get(`${environment.apiUrl}/covid-tests/employee/${uuid}`);
-  // }
+  getTestsForEmployee(uuid: string): Observable<any> {
+    return this.http.get(
+      `${environment.apiUrl}/covid-tests/all-tests-for-employee?id=${uuid}`
+    );
+  }
 
   saveEmployee(employee: Employee, edit: boolean): Observable<any> {
     if (edit) {
@@ -65,7 +67,6 @@ export class CandidatesService {
   }
 
   deleteEmployee(id: String): Observable<any> {
-    console.log("unutar servisa", id);
     return this.http.delete(`${environment.apiUrl}/employees/${id}`);
   }
 }

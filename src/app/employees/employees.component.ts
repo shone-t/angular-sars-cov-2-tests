@@ -16,6 +16,7 @@ export class EmployeesComponent implements OnInit {
   list!: Observable<any>;
   statuses: any[] = [];
   productDialog: boolean = false;
+  listDialog: boolean = false;
   employeesData: any[] = [];
   employee: any;
   selectedTest: any[] = [];
@@ -27,8 +28,7 @@ export class EmployeesComponent implements OnInit {
   editMode = false;
   formEmployee: FormGroup;
   lastTableLazyLoadEvent: LazyLoadEvent = {};
-  // employeeTests: any[] = [];
-  // listOfTestVisible: boolean = false;
+  usersData: any[] = [];
 
   constructor(
     private service: CandidatesService,
@@ -153,24 +153,6 @@ export class EmployeesComponent implements OnInit {
       });
   }
 
-  // getTestsForEmployee(uuid: string): void {
-  //   this.listOfTestVisible = true;
-  //   this.productDialog = true;
-  //   this.service
-  //     .getTestsForEmployee(uuid)
-  //     .pipe(take(1))
-  //     .subscribe({
-  //       next: (res: any) => {
-  //         this.alertService.success("Load all tests for employee");
-  //         this.employeeTests = res;
-  //         console.log(this.employeeTests);
-  //       },
-  //       error: (error) => {
-  //         this.alertService.error(error);
-  //       },
-  //     });
-  // }
-
   deleteEmployee(employee: Employee) {
     this.service
       .deleteEmployee(employee.uuid!)
@@ -183,6 +165,25 @@ export class EmployeesComponent implements OnInit {
         error: (err) => {
           this.alertService.success(err);
           this.loadEmployees(this.lastTableLazyLoadEvent);
+        },
+      });
+  }
+
+  listDialogShow(uuid: string) {
+    this.listDialog = true;
+    this.loading = true;
+    this.service
+      .getTestsForEmployee(uuid)
+      .pipe(take(1))
+      .subscribe({
+        next: (res) => {
+          this.alertService.success("Load all tests for employee");
+          this.usersData = res;
+          this.loading = false;
+        },
+        error: (err) => {
+          this.loading = false;
+          this.alertService.error(err);
         },
       });
   }
