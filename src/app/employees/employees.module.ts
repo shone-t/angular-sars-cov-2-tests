@@ -16,6 +16,8 @@ import { RadioButtonModule } from "primeng/radiobutton";
 import { TableModule } from "primeng/table";
 import { ToastModule } from "primeng/toast";
 import { ToolbarModule } from "primeng/toolbar";
+import { ConfirmDialogModule } from "primeng/confirmdialog";
+import { ConfirmationService, MessageService } from "primeng/api";
 
 @NgModule({
   declarations: [EmployeesComponent],
@@ -37,7 +39,9 @@ import { ToolbarModule } from "primeng/toolbar";
     ReactiveFormsModule,
     CalendarModule,
     InputMaskModule,
+    ConfirmDialogModule,
   ],
   exports: [EmployeesComponent],
+  providers: [ConfirmationService, MessageService],
 })
 export class EmployeesModule {}

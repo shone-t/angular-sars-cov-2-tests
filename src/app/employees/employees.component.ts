@@ -1,7 +1,12 @@
 import { FormBuilder, Validators } from "@angular/forms";
 import { FormGroup } from "@angular/forms";
 import { Component, OnInit } from "@angular/core";
-import { LazyLoadEvent } from "primeng/api";
+import {
+  ConfirmationService,
+  ConfirmEventType,
+  LazyLoadEvent,
+  MessageService,
+} from "primeng/api";
 import { Observable, take } from "rxjs";
 import { CandidatesService } from "../_services/candidates.service";
 import { Employee } from "./../_models/employee";
@@ -33,7 +38,9 @@ export class EmployeesComponent implements OnInit {
   constructor(
     private service: CandidatesService,
     private _formBuilder: FormBuilder,
-    private alertService: AlertService
+    private alertService: AlertService,
+    private confirmationService: ConfirmationService,
+    private messageService: MessageService
   ) {
     this.formEmployee = this._formBuilder.group({
       uuid: [""],
@@ -153,9 +160,43 @@ export class EmployeesComponent implements OnInit {
       });
   }
 
-  deleteEmployee(employee: Employee) {
+  deleteEmployeeConfirm(employee: Employee) {
+    this.confirmationService.confirm({
+      message: "Do you want to delete this employee?",
+      header: "Delete Confirmation",
+      icon: "pi pi-info-circle",
+      accept: () => {
+        this.messageService.add({
+          severity: "info",
+          summary: "Confirmed",
+          detail: "Record deleted",
+        });
+        this.deleteFunction(employee.uuid!);
+      },
+      reject: (type: any) => {
+        switch (type) {
+          case ConfirmEventType.REJECT:
+            this.messageService.add({
+              severity: "error",
+              summary: "Rejected",
+              detail: "You have rejected",
+            });
+            break;
+          case ConfirmEventType.CANCEL:
+            this.messageService.add({
+              severity: "warn",
+              summary: "Cancelled",
+              detail: "You have cancelled",
+            });
+            break;
+        }
+      },
+    });
+  }
+
+  deleteFunction(id: string) {
     this.service
-      .deleteEmployee(employee.uuid!)
+      .deleteEmployee(id)
       .pipe(take(1))
       .subscribe({
         next: (el) => {
