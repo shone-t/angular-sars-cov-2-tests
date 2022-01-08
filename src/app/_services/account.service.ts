@@ -105,9 +105,14 @@ export class AccountService {
   }
 
   resetPassword(token: string, body: any) {
+    const bodyParams = {
+      password: body.password,
+      token,
+    };
+
     return this.http.post(
-      `${environment.apiUrl}/users/reset-password/token=${token}`,
-      body
+      `${environment.apiUrl}/users/reset-password`,
+      bodyParams
     );
   }
 }
