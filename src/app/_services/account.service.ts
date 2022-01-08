@@ -103,4 +103,11 @@ export class AccountService {
       email,
     });
   }
+
+  resetPassword(token: string, body: any) {
+    return this.http.post(
+      `${environment.apiUrl}/users/reset-password?token=${token}`,
+      body
+    );
+  }
 }

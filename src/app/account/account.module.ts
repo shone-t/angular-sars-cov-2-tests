@@ -10,6 +10,7 @@ import { RegisterComponent } from "./register.component";
 import { ButtonModule } from "primeng/button";
 import { PasswordModule } from "primeng/password";
 import { ForgotComponent } from "./forgot.component";
+import { ResetComponent } from "./reset.component";
 
 @NgModule({
   imports: [
@@ -25,6 +26,7 @@ import { ForgotComponent } from "./forgot.component";
     RegisterComponent,
     ForgotComponent,
     VerifyComponent,
+    ResetComponent,
   ],
 })
 export class AccountModule {}
