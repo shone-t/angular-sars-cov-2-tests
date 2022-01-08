@@ -12,6 +12,7 @@ export class VerifyComponent implements OnInit {
   loading = false;
   submitted = false;
   email = "";
+  resendAgain = false;
 
   constructor(
     private router: Router,
@@ -31,7 +32,11 @@ export class VerifyComponent implements OnInit {
     }
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    setTimeout(() => {
+      this.resendAgain = true;
+    }, 3000);
+  }
 
   sendAgainMail() {
     this.loading = true;

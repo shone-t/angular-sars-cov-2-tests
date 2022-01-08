@@ -39,10 +39,6 @@ export class ForgotComponent implements OnInit {
   }
 
   onSubmit() {
-    this.router.navigate(["/account/verify"], {
-      state: { email: this.f["email"].value },
-    });
-    return;
     this.submitted = true;
 
     // reset alerts on submit
