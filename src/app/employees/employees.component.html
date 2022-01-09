@@ -22,9 +22,10 @@
             <ng-template pTemplate="caption">
                 <div class="p-d-flex p-ai-center p-jc-between">
                     <h5 class="p-m-0">Candidates</h5>
-                    <span class="p-input-icon-left">
+                    <span class="p-input-icon-left p-0 col-sm-6">
                         <i class="pi pi-search"></i>
-                        <input pInputText type="text" (input)="searchEmployee($event)" placeholder="Search..." />
+                        <input pInputText type="text" class="w-100" (input)="searchEmployee($event)"
+                            placeholder="Search..." />
                     </span>
                 </div>
             </ng-template>

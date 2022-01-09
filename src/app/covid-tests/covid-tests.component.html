@@ -22,9 +22,9 @@
       <ng-template pTemplate="caption">
         <div class="p-d-flex p-ai-center p-jc-between">
           <h5 class="p-m-0">Covid Test</h5>
-          <span class="p-input-icon-left">
+          <span class="p-input-icon-left p-0 col-sm-6">
             <i class="pi pi-search"></i>
-            <input pInputText type="text" (input)="searchCovidTest($event)" placeholder="Search..." />
+            <input pInputText type="text" class="w-100" (input)="searchCovidTest($event)" placeholder="Search..." />
           </span>
         </div>
       </ng-template>
@@ -157,33 +157,47 @@
         <div class="col-12">
           <label for="time">Time</label>
         </div>
-        <div class="col-7">
+        <div class="col-sm-7">
           <p-calendar formControlName="createdTest" [disabled]="dateLock" [showIcon]="true" dateFormat="dd.mm.yy"
             [showTime]="true" [showSeconds]="true" inputId="time" appendTo="body">
           </p-calendar>
         </div>
-        <div class="col-2 d-flex align-items-center">
+        <div class="col-sm-2 col-6 d-flex align-items-center">
           <button type="button" pButton pRipple label="Now" [disabled]="dateLock" (click)="dateNow()"
             class="p-button-outlined"></button>
           <!-- <button type="button" pButton pRipple [label]="dateLock ? 'Unlock' : 'Lock'"
                             (click)="dateDisabled()" [icon]="dateLock ? 'pi pi-lock' : 'pi pi-unlock'"
                             class="p-button-text"></button> -->
         </div>
-        <div class="col-2 d-flex align-items-center">
+        <div class="col-sm-2 col-6 d-flex align-items-center">
           <label class="mb-0 mr-2">Unlock</label>
           <p-inputSwitch (onChange)="dateDisabled()" class="d-flex"></p-inputSwitch>
         </div>
       </div>
       <div class="p-field p-mb-1">
         <label for="inventoryStatus">Covid Test Status</label>
-        <p-dropdown inputId="inventoryStatus" [options]="statuses" formControlName="testResult" placeholder="Select">
+        <!-- <p-dropdown inputId="inventoryStatus" [options]="statuses" formControlName="testResult" placeholder="Select">
           <ng-template let-option pTemplate="item">
             <span [class]="'covid-status-badge status-' + option.value">{{
               option.label
               }}</span>
           </ng-template>
-        </p-dropdown>
+        </p-dropdown> -->
+
+        <div class="p-field-radiobutton d-flex my-3">
+          <p-radioButton class="pr-3" name="testResult" [value]="true" formControlName="testResult"
+            inputId="testResult1">
+          </p-radioButton>
+          <label class="mb-0 covid-status-badge status-true" for="testResult1">POSITIVE</label>
+        </div>
+        <div class="p-field-radiobutton d-flex my-3">
+          <p-radioButton class="pr-3" name="testResult" [value]="false" formControlName="testResult"
+            inputId="testResult2">
+          </p-radioButton>
+          <label class="mb-0 covid-status-badge status-false" for="testResult2">NEGATIVE</label>
+        </div>
       </div>
+
       <div class="mt-3">
         <p-accordion>
           <p-accordionTab header="Additional info">
