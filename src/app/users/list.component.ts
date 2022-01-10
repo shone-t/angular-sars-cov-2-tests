@@ -42,8 +42,10 @@ export class ListComponent implements OnInit {
     this.formUser = this._formBuilder.group({
       uuid: [""],
       name: ["", Validators.required],
-      email: ["", [Validators.required]],
+      email: ["", [Validators.required, Validators.email]],
       username: ["", Validators.required],
+      password: [""],
+      confirmPassword: [""],
     });
   }
 
@@ -88,6 +90,11 @@ export class ListComponent implements OnInit {
     });
   }
 
+  // convenience getter for easy access to form fields
+  get f() {
+    return this.formUser.controls;
+  }
+
   deleteUserFunction(id: string): void {
     const user = this.users!.find((x) => x.uuid === id);
     // user.isDeleting = true;
@@ -100,10 +107,16 @@ export class ListComponent implements OnInit {
   openNew(): void {
     this.productDialog = true;
     this.editMode = false;
+    this.f["password"].addValidators([Validators.required, Validators.min(8)]);
+    this.f["confirmPassword"].addValidators([
+      Validators.required,
+      Validators.min(8),
+    ]);
   }
 
   hideDialog(): void {
     this.productDialog = false;
+    this.editMode = false;
     this.formUser.reset();
   }
 
@@ -132,54 +145,62 @@ export class ListComponent implements OnInit {
   editUser(user: any): void {
     this.editMode = true;
     this.productDialog = true;
-
+    this.f["password"].clearValidators();
+    this.f["confirmPassword"].clearValidators();
     const obj: User = {
       uuid: user.uuid,
       name: user.name,
-      username: user.username,
-      password: user.password,
       email: user.email,
+      username: user.username,
+      password: "",
+      confirmPassword: "",
     };
     this.formUser.patchValue(obj);
   }
 
   saveUser(): void {
-    // if (this.formUser.invalid) {
-    //   return;
-    // }
-    // this.service
-    //   .saveUser(this.formUser.value, this.editMode)
-    //   .pipe(take(1))
-    //   .subscribe({
-    //     next: () => {
-    //       this.alertService.success("User added successfully");
-    //       this.productDialog = false;
-    //       this.loading = false;
-    //       this.loadUsers(this.lastTableLazyLoadEvent);
-    //       this.formUser.reset();
-    //     },
-    //     error: (error) => {
-    //       this.alertService.error(error);
-    //       this.productDialog = false;
-    //       this.loading = false;
-    //       this.formUser.reset();
-    //     },
-    //   });
+    // reset alerts on submit
+    this.alertService.clear();
 
-    this.accountService
-      .update(this.formUser.value.uuid, this.formUser.value)
-      .pipe(first())
-      .subscribe({
-        next: () => {
-          this.alertService.success("Update successful");
-          this.loadUsers(this.lastTableLazyLoadEvent);
-          this.hideDialog();
-          // this.router.navigate(["../../"], { relativeTo: this.route });
-        },
-        error: (error) => {
-          this.alertService.error(error);
-          this.loading = false;
-        },
-      });
+    // stop here if form is invalid
+    if (this.formUser.invalid) {
+      return;
+    }
+
+    this.loading = true;
+    if (this.editMode) {
+      this.accountService
+        .update(this.formUser.value.uuid, this.formUser.value)
+        .pipe(first())
+        .subscribe({
+          next: () => {
+            this.alertService.success("Update successful");
+            this.loadUsers(this.lastTableLazyLoadEvent);
+            this.hideDialog();
+            // this.router.navigate(["../../"], { relativeTo: this.route });
+          },
+          error: (error) => {
+            this.alertService.error(error);
+            this.loading = false;
+          },
+        });
+    } else {
+      this.accountService
+        .register(this.formUser.value)
+        .pipe(first())
+        .subscribe({
+          next: () => {
+            this.alertService.success("Registration successful");
+            // this.alertService.success("Update successful");
+            this.loadUsers(this.lastTableLazyLoadEvent);
+            this.hideDialog();
+            // this.router.navigate(["../login"], { relativeTo: this.route });
+          },
+          error: (error) => {
+            this.alertService.error(error);
+            this.loading = false;
+          },
+        });
+    }
   }
 }

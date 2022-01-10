@@ -14,7 +14,7 @@ const routes: Routes = [
     component: LayoutComponent,
     children: [
       { path: "login", component: LoginComponent },
-      { path: "register", component: RegisterComponent },
+      // { path: "register", component: RegisterComponent },
       { path: "forgot", component: ForgotComponent },
       { path: "verify", component: VerifyComponent },
       { path: "reset-password/:token", component: ResetComponent },
