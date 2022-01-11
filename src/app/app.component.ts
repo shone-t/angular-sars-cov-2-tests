@@ -58,6 +58,7 @@ export class AppComponent {
         label: "Users",
         icon: "pi pi-fw pi-user",
         routerLink: "/users",
+        visible: this.getUuid() === "325be170-70d5-11ec-a0d4-2519a245f031",
       },
     ];
   }
@@ -84,5 +85,17 @@ export class AppComponent {
     return localStorage.getItem("user") === null
       ? ""
       : JSON.parse(localStorage.getItem("user")!).name;
+  }
+
+  public getRole(): string | null {
+    return localStorage.getItem("user") === null
+      ? "user"
+      : JSON.parse(localStorage.getItem("user")!).role;
+  }
+
+  public getUuid(): string | null {
+    return localStorage.getItem("user") === null
+      ? "user"
+      : JSON.parse(localStorage.getItem("user")!).uuid;
   }
 }

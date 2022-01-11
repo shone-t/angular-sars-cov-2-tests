@@ -101,7 +101,7 @@ export class ListComponent implements OnInit {
     this.accountService
       .delete(id)
       .pipe(first())
-      .subscribe(() => (this.users = this.users!.filter((x) => x.uuid !== id)));
+      .subscribe(() => this.loadUsers(this.lastTableLazyLoadEvent));
   }
 
   openNew(): void {
