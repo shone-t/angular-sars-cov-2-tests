@@ -1,11 +1,12 @@
-import { Component } from "@angular/core";
+import { OnInit, Component } from "@angular/core";
 
 import { AccountService, AlertService } from "./_services";
 import { User } from "./_models";
 import { MenuItem } from "primeng/api";
+import { adminId } from "./_helpers/constants";
 
 @Component({ selector: "app", templateUrl: "app.component.html" })
-export class AppComponent {
+export class AppComponent implements OnInit {
   user: User | undefined;
   items: MenuItem[];
   userItems: MenuItem[];
@@ -43,7 +44,23 @@ export class AppComponent {
       },
     ];
 
-    this.items = [
+    this.items = this.getMenu();
+  }
+
+  ngOnInit(): void {
+    this.accountService.user.subscribe({
+      next: (user: User) => {
+        this.items = this.getMenu();
+      },
+    });
+  }
+
+  logout() {
+    this.accountService.logout();
+  }
+
+  getMenu() {
+    return [
       {
         label: "Covid Tests",
         icon: "pi pi-fw pi-pencil",
@@ -58,13 +75,9 @@ export class AppComponent {
         label: "Users",
         icon: "pi pi-fw pi-user",
         routerLink: "/users",
-        visible: this.getUuid() === "325be170-70d5-11ec-a0d4-2519a245f031",
+        visible: this.getUuid() === adminId,
       },
     ];
-  }
-
-  logout() {
-    this.accountService.logout();
   }
 
   public localStorageItem(id: string): string | null {

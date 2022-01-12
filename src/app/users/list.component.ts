@@ -1,4 +1,4 @@
-﻿import { Component, OnInit } from "@angular/core";
+﻿import { Component } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { LazyLoadEvent } from "primeng/api";
 import { first } from "rxjs/operators";
@@ -11,12 +11,13 @@ import {
   ConfirmEventType,
   MessageService,
 } from "primeng/api";
+import { adminId } from "../_helpers/constants";
 
 @Component({
   templateUrl: "list.component.html",
   styleUrls: ["./users.component.scss"],
 })
-export class ListComponent implements OnInit {
+export class ListComponent {
   users: User[] | undefined;
   value: Date = new Date();
 
@@ -47,13 +48,6 @@ export class ListComponent implements OnInit {
       password: [""],
       confirmPassword: [""],
     });
-  }
-
-  ngOnInit() {
-    this.accountService
-      .getAll()
-      .pipe(first())
-      .subscribe((users) => (this.users = users));
   }
 
   deleteUser(id: string) {
@@ -135,7 +129,7 @@ export class ListComponent implements OnInit {
       .getAll()
       .pipe(first())
       .subscribe((data) => {
-        this.usersData = data;
+        this.usersData = data.filter((user) => user.uuid !== adminId);
         this.loading = false;
       });
   }

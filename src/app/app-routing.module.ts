@@ -1,3 +1,4 @@
+import { AdminGuard } from "./_helpers/admin.guard";
 import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
 
@@ -15,7 +16,11 @@ const employees = () =>
 
 const routes: Routes = [
   { path: "", component: HomeComponent, canActivate: [AuthGuard] },
-  { path: "users", loadChildren: usersModule, canActivate: [AuthGuard] },
+  {
+    path: "users",
+    loadChildren: usersModule,
+    canActivate: [AuthGuard, AdminGuard],
+  },
   { path: "account", loadChildren: accountModule },
   { path: "covid-tests", loadChildren: covidTest, canActivate: [AuthGuard] },
   { path: "employees", loadChildren: employees, canActivate: [AuthGuard] },
