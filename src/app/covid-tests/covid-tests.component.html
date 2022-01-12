@@ -52,7 +52,7 @@
       <ng-template pTemplate="body" let-covidTest>
         <tr>
           <td>{{ covidTest.name }}</td>
-          <td>{{ covidTest.createdTest | date: "dd/MM/yyyy HH:mm:ss" }}</td>
+          <td>{{ covidTest.createdTest | date: "dd/MM/yyyy HH:mm" }}</td>
           <td>
             <span [class]="
                 'covid-status-badge status-' + covidTest.testResult

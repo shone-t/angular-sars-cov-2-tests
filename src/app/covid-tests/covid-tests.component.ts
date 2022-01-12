@@ -71,19 +71,8 @@ export class CovidTestsComponent implements OnInit {
     private confirmationService: ConfirmationService,
     private messageService: MessageService
   ) {
-    this.formCovidTest = this._formBuilder.group({
-      uuid: [""],
-      name: ["", Validators.required],
-      address: ["", Validators.required],
-      dateOfBirth: ["", Validators.required],
-      emailOrTelephone: ["", [Validators.required, Validators.email]],
-      idUser: [""],
-      employeeId: [""],
-      userName: [""],
-      testResult: ["", Validators.required],
-      createdTest: [new Date(), Validators.required],
-      internalMessage: [""],
-    });
+    this.formCovidTest = this._formBuilder.group({});
+    this.createForm();
   }
 
   ngOnInit(): void {
@@ -115,6 +104,7 @@ export class CovidTestsComponent implements OnInit {
     this.autoCompleteText = [];
     this.dateLock = true;
     this.formCovidTest.reset();
+    this.createForm();
   }
 
   loadTests(event: LazyLoadEvent) {
@@ -155,7 +145,7 @@ export class CovidTestsComponent implements OnInit {
       dateOfBirth: event.dateOfBirth,
       emailOrTelephone: event.emailOrTelephone,
       idUser: event.idUser,
-      // employeeId: event.employeeId,
+      employeeId: event.employeeId,
       userName: event.userName,
       testResult: event.testResult,
       createdTest: new Date(event.createdTest),
@@ -191,6 +181,22 @@ export class CovidTestsComponent implements OnInit {
           this.loading = false;
         });
     }
+  }
+
+  createForm(): void {
+    this.formCovidTest = this._formBuilder.group({
+      uuid: [""],
+      name: ["", Validators.required],
+      address: ["", Validators.required],
+      dateOfBirth: ["", Validators.required],
+      emailOrTelephone: ["", [Validators.required, Validators.email]],
+      idUser: [""],
+      employeeId: ["0"],
+      userName: [""],
+      testResult: [undefined, Validators.required],
+      createdTest: [new Date(), Validators.required],
+      internalMessage: [""],
+    });
   }
 
   autoCompleteSearch(event: any) {

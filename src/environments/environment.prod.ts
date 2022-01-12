@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: "http://node.mtp-testzentrum.de",
+  apiUrl: "https://node.mtp-testzentrum.de",
 };

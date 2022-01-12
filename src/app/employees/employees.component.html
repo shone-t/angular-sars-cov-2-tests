@@ -17,7 +17,7 @@
       ]" responsiveLayout="scroll" [(selection)]="selectedTest" [rowHover]="true" dataKey="id"
             [rowsPerPageOptions]="[10, 25, 50]"
             currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-            [showCurrentPageReport]="true">
+            [showCurrentPageReport]="true" sortField="createdAt" [sortOrder]="-1">
             <ng-template pTemplate="caption">
                 <div class="p-d-flex p-ai-center p-jc-between">
                     <h5 class="p-m-0">Candidates</h5>
@@ -41,6 +41,9 @@
                     <th pSortableColumn="address">
                         Address <p-sortIcon field="address"></p-sortIcon>
                     </th>
+                    <th pSortableColumn="createdAt">
+                        Created Date <p-sortIcon field="createdAt"></p-sortIcon>
+                    </th>
                     <th></th>
                 </tr>
             </ng-template>
@@ -50,11 +53,14 @@
                     <td>{{ covidTest.dateOfBirth }}</td>
                     <td>{{ covidTest.emailOrTelephone }}</td>
                     <td>{{ covidTest.address }}</td>
-                    <td class="text-right d-flex-md">
-                        <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success p-mr-2"
-                            (click)="editEmployee(covidTest)"></button>
-                        <button pButton pRipple icon="pi pi-trash" (click)="deleteEmployeeConfirm(covidTest)"
-                            class="p-button-rounded p-button-danger"></button>
+                    <td>{{ covidTest.createdAt | date: "dd/MM/yyyy HH:mm" }}</td>
+                    <td class="text-right">
+                        <div class="d-flex">
+                            <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success p-mr-2"
+                                (click)="editEmployee(covidTest)"></button>
+                            <button pButton pRipple icon="pi pi-trash" (click)="deleteEmployeeConfirm(covidTest)"
+                                class="p-button-rounded p-button-danger"></button>
+                        </div>
                     </td>
                 </tr>
             </ng-template>
