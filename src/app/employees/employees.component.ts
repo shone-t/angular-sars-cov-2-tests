@@ -1,6 +1,6 @@
 import { FormBuilder, Validators } from "@angular/forms";
 import { FormGroup } from "@angular/forms";
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ViewChild } from "@angular/core";
 import {
   ConfirmationService,
   ConfirmEventType,
@@ -11,6 +11,7 @@ import { Observable, take } from "rxjs";
 import { CandidatesService } from "../_services/candidates.service";
 import { Employee } from "./../_models/employee";
 import { AlertService } from "../_services";
+import { Table } from "primeng/table";
 
 @Component({
   selector: "app-employees",
@@ -18,6 +19,8 @@ import { AlertService } from "../_services";
   styleUrls: ["./employees.component.scss"],
 })
 export class EmployeesComponent implements OnInit {
+  @ViewChild("dt") private dataTable?: Table;
+
   list!: Observable<any>;
   statuses: any[] = [];
   productDialog: boolean = false;
@@ -106,6 +109,7 @@ export class EmployeesComponent implements OnInit {
           this.employeesData = data["rows"];
           this.totalRecords = data["count"];
           this.loading = false;
+          this.dataTable?.clear();
         });
     }
   }

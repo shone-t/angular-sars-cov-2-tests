@@ -188,6 +188,10 @@ a {
   margin-bottom: 1em;
 }
 
+.p-dialog {
+  max-width: 1200px;
+}
+
 @media screen and (max-width: 992px) {
   .p-paginator .p-paginator-current {
     display: block;

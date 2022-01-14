@@ -149,7 +149,7 @@
         </div>
         <div class="col-sm-7">
           <p-calendar formControlName="createdTest" [disabled]="dateLock" [showIcon]="true" dateFormat="dd.mm.yy"
-            [showTime]="true" [showSeconds]="true" inputId="time" appendTo="body">
+            [showTime]="true" [showSeconds]="false" inputId="time" appendTo="body">
           </p-calendar>
         </div>
         <div class="col-sm-2 col-6 d-flex align-items-center">
@@ -204,8 +204,8 @@
   <ng-template pTemplate="footer">
     <button type="button" (click)="closeDialog()" pButton pRipple label="Cancel" icon="pi pi-times"
       class="p-button-raised p-button-warning p-button-text"></button>
-    <button type="button" [disabled]="!formCovidTest.valid" pButton pRipple (click)="saveCovidTest()" label="Save"
-      icon="pi pi-check" class="p-button-raised p-button-text"></button>
+    <button type="button" [disabled]="!formCovidTest.valid" pButton pRipple (click)="saveCovidTest()"
+      label="Save and Send Emil" icon="pi pi-check" class="p-button-raised p-button-text"></button>
   </ng-template>
 </p-dialog>
 

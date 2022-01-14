@@ -1,7 +1,7 @@
 import { AlertService } from "./../_services/alert.service";
 import { map, take } from "rxjs/operators";
 import { Observable } from "rxjs";
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ViewChild } from "@angular/core";
 // import { CovidTestsService } from "../_services";
 import { CovidTestsService } from "../_services/covidTest.sevice";
 import {
@@ -13,6 +13,7 @@ import {
 import { CandidatesService } from "../_services/candidates.service";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { CovidTest } from "../_models";
+import { Table } from "primeng/table";
 
 @Component({
   selector: "app-covid-tests",
@@ -20,6 +21,7 @@ import { CovidTest } from "../_models";
   styleUrls: ["./covid-tests.component.scss"],
 })
 export class CovidTestsComponent implements OnInit {
+  @ViewChild("dt") private dataTable?: Table;
   list!: Observable<any>;
   statuses: any[] = [];
   productDialog: boolean = false;
@@ -179,6 +181,7 @@ export class CovidTestsComponent implements OnInit {
           this.covidTestsData = data["rows"];
           this.totalRecords = data["count"];
           this.loading = false;
+          this.dataTable?.clear();
         });
     }
   }
@@ -300,7 +303,9 @@ export class CovidTestsComponent implements OnInit {
   confirmation(type: string, id: string) {
     this.confirmationService.confirm({
       message: `Do you want to ${
-        type === "download" ? "download" : "send mail"
+        type === "download"
+          ? "download"
+          : "send mail again with Covid Test Document"
       }?`,
       header: `${type === "download" ? "Download" : "Send mail"} Confirmation`,
       icon: "pi pi-info-circle",
