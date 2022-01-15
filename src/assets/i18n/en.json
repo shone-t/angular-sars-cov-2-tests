@@ -1,0 +1,64 @@
+{
+  "main": {
+    "new": "New",
+    "showing": "Showing",
+    "to": "to",
+    "of": "of",
+    "entries": "entries",
+    "password": "Password"
+  },
+  "passwordStrength":{
+      "pickPassword": "Pick a password",
+      "suggestions": "Suggestions",
+      "lowercase": "At least one lowercase",
+      "uppercase": "At least one uppercase",
+      "numeric": "At least one numeric",
+      "characters": "Minimum 8 characters"
+  },
+  "signIn": {
+    "signIn": "Sign in",
+    "yourUsername": "Your username",
+    "usernamePlaceholder": "Enter Username",
+    "forgotPassword": "Forgot Password?",
+    "login": "Login"
+  },
+  "forgot": {
+    "forgotPassword": "Forgot password?",
+    "forgotMessage": "Enter the email address you used when you joined and we'll send you instructions to reset your password.",
+    "yourEmail": "Your email",
+    "submit": "Submit",
+    "backToLogin": "Back to Login",
+    "emailReq": "Email is required",
+    "emailInvalid": "Email is invalid"
+  },
+  "resetPassword": {
+    "reset": "Reset Password",
+    "message": "If you know your password ",
+    "backToLogin": "back to Login.",
+    "confirmPass": "Confirm password",
+    "notSame": "Password are not same"
+  },
+  "covidTest": {
+    "search": "Search...",
+    "date": "Date",
+    "testResult": "Test Result",
+    "address": "Address",
+    "dob": "Date of birth",
+    "createNew": "Create New",
+    "searchForEmployee": "Search for Candidate",
+    "firsrNameAndLastName": "First Name and Last Name",
+    "editTest": "Edit Test",
+    "unlock": "Unlock",
+    "now": "Now",
+    "additionalInfo": "Additional Info",
+    "message": "Message",
+    "cancel": "Cancel",
+    "sendAndSendEmail": "Send and send email",
+    "downloadConfirmation": "Download Confirmation",
+    "downloadMessage": "Do you want to download test for this candidate?",
+    "emailConfirmation": "Send mail Confirmation",
+    "emailMessage": "Do you want to send mail again with Covid Test Document?",
+    "yes": "Yes",
+    "no": "No"
+  }
+}

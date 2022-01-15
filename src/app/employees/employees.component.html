@@ -69,7 +69,7 @@
 </div>
 
 <p-dialog [(visible)]="productDialog" (onHide)="hideDialog()" [style]="{ width: '90%' }"
-    [header]="editMode ? 'Edit Test' : 'Create New'" [modal]="true" [draggable]="false" styleClass="p-fluid">
+    [header]="editMode ? 'Edit Candidate' : 'Create New'" [modal]="true" [draggable]="false" styleClass="p-fluid">
     <ng-template pTemplate="content">
 
         <form autocomplete="off" [formGroup]="formEmployee" (ngSubmit)="saveEmployee()">

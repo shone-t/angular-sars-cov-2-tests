@@ -1,0 +1,64 @@
+{
+  "main": {
+    "new": "Neu",
+    "showing": "Zeigt",
+    "to": "zu",
+    "of": "von",
+    "entries": "Einträge",
+    "password": "Passwort"
+  },
+  "passwordStrength":{
+    "pickPassword": "Passwort wählen",
+    "suggestions": "Vorschläge",
+    "lowercase": "Mindestens ein Kleinbuchstabe",
+    "uppercase": "Mindestens ein Großbuchstabe",
+    "numeric": "Mindestens eine Ziffer",
+    "characters": "Mindestens 8 Zeichen"
+},
+  "signIn": {
+    "signIn": "Anmelden",
+    "yourUsername": "Ihr Benutzername",
+    "usernamePlaceholder": "Benutzernamen eingeben",
+    "forgotPassword": "Passwort vergessen?",
+    "login": "Einloggen"
+  },
+  "forgot": {
+    "forgotPassword": "Passwort vergessen?",
+    "forgotMessage": "Geben Sie die E-Mail-Adresse ein, die Sie beim Beitritt verwendet haben, und wir senden Ihnen Anweisungen zum Zurücksetzen Ihres Passworts.",
+    "yourEmail": "Ihre E-Mail",
+    "submit": "Absenden",
+    "backToLogin": "Zurück zum Login",
+    "emailReq": "E-Mail ist erforderlich",
+    "emailInvalid": "E-Mail ist ungültig"
+  },
+  "resetPassword": {
+    "reset": "Passwort zurücksetzen",
+    "message": "Wenn Sie Ihr Passwort kennen",
+    "backToLogin": "Zurück zum Login.",
+    "confirmPass": "Passwort bestätigen",
+    "notSame": "Passwort sind nicht gleich"
+  },
+  "covidTest": {
+    "search": "Suche...",
+    "date": "Datum",
+    "testResult": "Testergebnis",
+    "address": "Adresse",
+    "dob": "Geburtsdatum",
+    "createNew": "Erstelle neu",
+    "searchForEmployee": "Suche nach Kandidat",
+    "firsrNameAndLastName": "Vorname und Nachname",
+    "editTest": "Test bearbeiten",
+    "unlock": "Freischalten",
+    "now": "Jetzt",
+    "additionalInfo": "Zusätzliche Information",
+    "message": "Nachricht",
+    "cancel": "Abbrechen",
+    "sendAndSendEmail": "E-Mail senden und speichern",
+    "downloadConfirmation": "Bestätigung herunterladen",
+    "downloadMessage": "Möchten Sie den Test für diesen Kandidat herunterladen?",
+    "emailConfirmation": "E-Mail-Bestätigung senden",
+    "emailMessage": "Möchten Sie erneut E-Mails mit Covid-Testdokument senden?",
+    "yes": "Bestätigen",
+    "no": "Nein"
+  }
+}

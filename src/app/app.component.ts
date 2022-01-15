@@ -4,6 +4,7 @@ import { AccountService, AlertService } from "./_services";
 import { User } from "./_models";
 import { MenuItem } from "primeng/api";
 import { adminId } from "./_helpers/constants";
+import { TranslateService } from "@ngx-translate/core";
 
 @Component({ selector: "app", templateUrl: "app.component.html" })
 export class AppComponent implements OnInit {
@@ -15,8 +16,11 @@ export class AppComponent implements OnInit {
 
   constructor(
     private accountService: AccountService,
-    private alertService: AlertService
+    private alertService: AlertService,
+    private translate: TranslateService
   ) {
+    translate.setDefaultLang("de");
+
     this.initials =
       localStorage.getItem("user") === null
         ? ""
@@ -76,7 +80,7 @@ export class AppComponent implements OnInit {
         icon: "pi pi-fw pi-user",
         routerLink: "/users",
         visible: this.getUuid() === adminId,
-      },
+      }
     ];
   }
 

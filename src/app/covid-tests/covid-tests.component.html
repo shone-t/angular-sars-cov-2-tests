@@ -2,7 +2,7 @@
   <div class="card">
     <p-toolbar styleClass="p-mb-4">
       <ng-template pTemplate="left">
-        <button pButton pRipple label="New" icon="pi pi-plus" class="p-button-success p-mr-2"
+        <button pButton pRipple label="{{'main.new' | translate}}" icon="pi pi-plus" class="p-button-success p-mr-2"
           (click)="openNew()"></button>
         <!-- <button pButton pRipple label="Delete" icon="pi pi-trash" class="p-button-danger"></button> -->
       </ng-template>
@@ -23,7 +23,7 @@
           <h5 class="p-m-0">Covid Test</h5>
           <span class="p-input-icon-left p-0 col-sm-6">
             <i class="pi pi-search"></i>
-            <input pInputText type="text" class="w-100" (input)="searchCovidTest($event)" placeholder="Search..." />
+            <input pInputText type="text" class="w-100" (input)="searchCovidTest($event)" placeholder="{{'covidTest.search' | translate}}" />
           </span>
         </div>
       </ng-template>
@@ -33,19 +33,19 @@
             Name <p-sortIcon field="name"></p-sortIcon>
           </th>
           <th pSortableColumn="createdTest">
-            Date <p-sortIcon field="createdTest"></p-sortIcon>
+            {{'covidTest.date' | translate}} <p-sortIcon field="createdTest"></p-sortIcon>
           </th>
           <th pSortableColumn="testResult">
-            Test Result <p-sortIcon field="testResult"></p-sortIcon>
+            {{'covidTest.testResult' | translate}} <p-sortIcon field="testResult"></p-sortIcon>
           </th>
           <th pSortableColumn="emailOrTelephone">
             Email
             <p-sortIcon field="emailOrTelephone"> </p-sortIcon>
           </th>
           <th pSortableColumn="address">
-            Address <p-sortIcon field="address"></p-sortIcon>
+            {{'covidTest.address' | translate}} <p-sortIcon field="address"></p-sortIcon>
           </th>
-          <th>Date of birth</th>
+          <th>{{'covidTest.dob' | translate}}</th>
           <th></th>
         </tr>
       </ng-template>
@@ -85,11 +85,11 @@
 </div>
 
 <p-dialog [(visible)]="productDialog" (onHide)="closeDialog()" [style]="{ width: '90%' }"
-  [header]="editMode ? 'Edit Test' : 'Create New'" [modal]="true" [draggable]="false" styleClass="p-fluid">
+  [header]="editMode ? translateStrings.editTest : translateStrings.createNew" [modal]="true" [draggable]="false" styleClass="p-fluid">
   <ng-template pTemplate="content">
     <!-- list of employee -->
     <div class="p-field mb-3" *ngIf="!editMode">
-      <label for="name">Search for Employee</label>
+      <label for="name">{{'covidTest.searchForEmployee' | translate}}</label>
       <p-autoComplete [(ngModel)]="autoCompleteText" [suggestions]="autoCompleteResults"
         (completeMethod)="autoCompleteSearch($event)" field="name" [dropdown]="true"
         (onSelect)="handleDropdown($event)">
@@ -105,7 +105,7 @@
       <div class="row">
         <div class="col-lg-6">
           <div class="p-field p-mb-1">
-            <label for="description">First Name and Last Name</label>
+            <label for="description">{{'covidTest.firsrNameAndLastName' | translate}}</label>
             <div class="p-inputgroup">
               <span class="p-inputgroup-addon"><i class="pi pi-user"></i></span>
               <input type="text" [attr.disabled]="selectedEmployee || editMode ? '' : null" formControlName="name"
@@ -115,7 +115,7 @@
         </div>
         <div class="col-lg-6">
           <div class="p-field p-mb-1">
-            <label for="description">Date of birth</label>
+            <label for="description">{{'covidTest.dob' | translate}}</label>
             <div class="p-field date-mask-input">
               <span class="p-inputgroup-addon"><i class="pi pi-calendar"></i></span>
               <p-inputMask mask="99/99/9999" [disabled]="selectedEmployee || editMode" formControlName="dateOfBirth"
@@ -126,11 +126,11 @@
         </div>
       </div>
       <div class="p-field p-mb-1">
-        <label for="description">Address</label>
+        <label for="description"> {{'covidTest.address' | translate}}</label>
         <div class="p-inputgroup">
           <span class="p-inputgroup-addon"><i class="pi pi-compass"></i></span>
           <input type="text" formControlName="address" [attr.disabled]="selectedEmployee || editMode ? '' : null"
-            pInputText required autofocus placeholder="Address">
+            pInputText required autofocus placeholder=" {{'covidTest.address' | translate}}">
         </div>
       </div>
       <div class="p-field p-mb-1">
@@ -145,7 +145,7 @@
 
       <div class="p-field p-mb-1 row">
         <div class="col-12">
-          <label for="time">Time</label>
+          <label for="time"> {{'covidTest.date' | translate}}</label>
         </div>
         <div class="col-sm-7">
           <p-calendar formControlName="createdTest" [disabled]="dateLock" [showIcon]="true" dateFormat="dd.mm.yy"
@@ -153,14 +153,14 @@
           </p-calendar>
         </div>
         <div class="col-sm-2 col-6 d-flex align-items-center">
-          <button type="button" pButton pRipple label="Now" [disabled]="dateLock" (click)="dateNow()"
+          <button type="button" pButton pRipple label="{{'covidTest.now' | translate}}" [disabled]="dateLock" (click)="dateNow()"
             class="p-button-outlined"></button>
           <!-- <button type="button" pButton pRipple [label]="dateLock ? 'Unlock' : 'Lock'"
                             (click)="dateDisabled()" [icon]="dateLock ? 'pi pi-lock' : 'pi pi-unlock'"
                             class="p-button-text"></button> -->
         </div>
         <div class="col-sm-2 col-6 d-flex align-items-center">
-          <label class="mb-0 mr-2">Unlock</label>
+          <label class="mb-0 mr-2">{{'covidTest.unlock' | translate}}</label>
           <p-inputSwitch (onChange)="dateDisabled()" class="d-flex"></p-inputSwitch>
         </div>
       </div>
@@ -190,9 +190,9 @@
 
       <div class="mt-3">
         <p-accordion>
-          <p-accordionTab header="Additional info">
+          <p-accordionTab header="{{'covidTest.additionalInfo' | translate}}">
             <div class="p-field">
-              <label for="description">Message</label>
+              <label for="description">{{'covidTest.message' | translate}}</label>
               <textarea id="description" formControlName="internalMessage" pInputTextarea rows="3" cols="20"></textarea>
             </div>
           </p-accordionTab>
@@ -202,10 +202,10 @@
   </ng-template>
 
   <ng-template pTemplate="footer">
-    <button type="button" (click)="closeDialog()" pButton pRipple label="Cancel" icon="pi pi-times"
+    <button type="button" (click)="closeDialog()" pButton pRipple label="{{'covidTest.cancel' | translate}}" icon="pi pi-times"
       class="p-button-raised p-button-warning p-button-text"></button>
     <button type="button" [disabled]="!formCovidTest.valid" pButton pRipple (click)="saveCovidTest()"
-      label="Save and Send Emil" icon="pi pi-check" class="p-button-raised p-button-text"></button>
+      label="{{'covidTest.sendAndSendEmail' | translate}}" icon="pi pi-check" class="p-button-raised p-button-text"></button>
   </ng-template>
 </p-dialog>
 

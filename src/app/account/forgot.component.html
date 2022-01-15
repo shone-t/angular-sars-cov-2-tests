@@ -7,28 +7,27 @@
       <form autocomplete="off" class="js-validate" novalidate="novalidate">
         <div class="text-center">
           <div class="mb-5">
-            <h1 class="display-4">Forgot <br />password?</h1>
-            <p>Enter the email address you used when you joined and we'll send you instructions to reset
-              your password.</p>
+            <h1 class="display-4">{{'forgot.forgotPassword' | translate}}</h1>
+            <p>{{'forgot.forgotMessage' | translate}}</p>
           </div>
         </div>
         <form [formGroup]="form" (ngSubmit)="onSubmit()">
           <div class="js-form-message form-group">
-            <label class="input-label" for="email">Your email</label>
+            <label class="input-label" for="email">{{'forgot.yourEmail' | translate}}</label>
 
             <input type="text" [ngClass]="{ 'is-invalid': submitted && f['email'].errors }" formControlName="email"
               class="form-control form-control-lg" name="email" id="email" placeholder="Markwilliams@example.com"
               [ngClass]="{ 'is-invalid': submitted && f['email'].errors }" />
             <div *ngIf="submitted && f['email'].errors" class="invalid-feedback">
-              <div *ngIf="f['email'].errors['required']">Email is required</div>
-              <div *ngIf="f['email'].invalid && !f['email'].errors['required']">Email is invalid</div>
+              <div *ngIf="f['email'].errors['required']">{{'forgot.emailReq' | translate}}</div>
+              <div *ngIf="f['email'].invalid && !f['email'].errors['required']">{{'forgot.emailInvalid' | translate}}</div>
             </div>
           </div>
 
           <div class="form-group mt-5 d-flex flex-column justify-content-between align-items-center">
-            <button pButton pRipple type="submit" [disabled]="loading" [loading]="loading" label="Submit"
+            <button pButton pRipple type="submit" [disabled]="loading" [loading]="loading" label="{{'forgot.submit' | translate}}"
               class="p-button-raised btn-block"></button>
-            <a routerLink="./login" class="mt-3"><i class="pi pi-angle-left"></i> Back to Login</a>
+            <a routerLink="./login" class="mt-3"><i class="pi pi-angle-left"></i> {{'forgot.backToLogin' | translate}}</a>
           </div>
         </form>
 

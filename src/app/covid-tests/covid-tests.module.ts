@@ -24,6 +24,7 @@ import { InputSwitchModule } from "primeng/inputswitch";
 import { AccordionModule } from "primeng/accordion";
 import { ConfirmDialogModule } from "primeng/confirmdialog";
 import { ConfirmationService } from "primeng/api";
+import { TranslateModule } from "@ngx-translate/core";
 
 @NgModule({
   declarations: [CovidTestsComponent],
@@ -48,6 +49,7 @@ import { ConfirmationService } from "primeng/api";
     InputSwitchModule,
     AccordionModule,
     ConfirmDialogModule,
+    TranslateModule
   ],
   providers: [
     MessageService,

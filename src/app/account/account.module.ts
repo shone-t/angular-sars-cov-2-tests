@@ -11,6 +11,7 @@ import { ButtonModule } from "primeng/button";
 import { PasswordModule } from "primeng/password";
 import { ForgotComponent } from "./forgot.component";
 import { ResetComponent } from "./reset.component";
+import { TranslateModule } from "@ngx-translate/core";
 
 @NgModule({
   imports: [
@@ -19,6 +20,7 @@ import { ResetComponent } from "./reset.component";
     AccountRoutingModule,
     ButtonModule,
     PasswordModule,
+    TranslateModule
   ],
   declarations: [
     LayoutComponent,

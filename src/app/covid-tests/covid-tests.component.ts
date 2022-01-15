@@ -14,6 +14,7 @@ import { CandidatesService } from "../_services/candidates.service";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { CovidTest } from "../_models";
 import { Table } from "primeng/table";
+import { TranslateService } from "@ngx-translate/core";
 
 @Component({
   selector: "app-covid-tests",
@@ -44,6 +45,8 @@ export class CovidTestsComponent implements OnInit {
   editMode = false;
   lastTableLazyLoadEvent: LazyLoadEvent = {};
 
+  translateStrings: any;
+
   buttonItems = [
     {
       icon: "pi pi-pencil",
@@ -71,8 +74,12 @@ export class CovidTestsComponent implements OnInit {
     private _formBuilder: FormBuilder,
     private alertService: AlertService,
     private confirmationService: ConfirmationService,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private translate: TranslateService
   ) {
+    this.translate.get('covidTest').subscribe((data:any)=> {
+      this.translateStrings = data;
+     });
     this.formCovidTest = this._formBuilder.group({});
     this.createForm();
   }
@@ -302,13 +309,15 @@ export class CovidTestsComponent implements OnInit {
 
   confirmation(type: string, id: string) {
     this.confirmationService.confirm({
-      message: `Do you want to ${
+      message: 
         type === "download"
-          ? "download"
-          : "send mail again with Covid Test Document"
-      }?`,
-      header: `${type === "download" ? "Download" : "Send mail"} Confirmation`,
+          ? this.translateStrings['downloadMessage']
+          : this.translateStrings['emailMessage']
+      ,
+      header: type === "download" ? this.translateStrings['downloadConfirmation'] : this.translateStrings['emailConfirmation'],
       icon: "pi pi-info-circle",
+      acceptLabel: this.translateStrings['yes'],
+      rejectLabel: this.translateStrings['no'],
       accept: () => {
         this.messageService.add({
           severity: "info",

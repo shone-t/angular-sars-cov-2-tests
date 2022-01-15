@@ -1,6 +1,6 @@
 import { NgModule } from "@angular/core";
 import { BrowserModule } from "@angular/platform-browser";
-import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
+import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 
 // used to create fake backend
 // import { fakeBackendProvider } from "./_helpers";
@@ -19,6 +19,8 @@ import { MessageModule } from "primeng/message";
 import { ToastModule } from "primeng/toast";
 import { MessageService } from "primeng/api";
 import { HashLocationStrategy, LocationStrategy } from "@angular/common";
+import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
+import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 
 @NgModule({
   imports: [
@@ -33,6 +35,14 @@ import { HashLocationStrategy, LocationStrategy } from "@angular/common";
     MessagesModule,
     MessageModule,
     ToastModule,
+    HttpClientModule,
+        TranslateModule.forRoot({
+            loader: {
+                provide: TranslateLoader,
+                useFactory: HttpLoaderFactory,
+                deps: [HttpClient]
+            }
+        })
   ],
   declarations: [AppComponent, HomeComponent],
   providers: [
@@ -46,3 +56,7 @@ import { HashLocationStrategy, LocationStrategy } from "@angular/common";
   bootstrap: [AppComponent],
 })
 export class AppModule {}
+
+export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
+  return new TranslateHttpLoader(http);
+}
