@@ -192,6 +192,10 @@ a {
   max-width: 1200px;
 }
 
+.p-confirm-dialog {
+  min-width: 280px;
+}
+
 @media screen and (max-width: 992px) {
   .p-paginator .p-paginator-current {
     display: block;
