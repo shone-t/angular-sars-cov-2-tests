@@ -5,7 +5,13 @@
     "to": "zu",
     "of": "von",
     "entries": "Einträge",
-    "password": "Passwort"
+    "password": "Passwort",
+    "candidates": "Kandidaten / Kandidatinnen",
+    "users": "Benutzer",
+    "userOptions": "Benutzeroptionen",
+    "logOut": "Ausloggen",
+    "changeLanguage": "Auf Englisch umstellen",
+    "languageToChange": "en"
   },
   "passwordStrength":{
     "pickPassword": "Passwort wählen",
@@ -60,5 +66,42 @@
     "emailMessage": "Möchten Sie erneut E-Mails mit Covid-Testdokument senden?",
     "yes": "Bestätigen",
     "no": "Nein"
+  },
+   "employee": {
+    "search": "Suche...",
+    "candidates": "Kandidaten / Kandidatinnen",
+    "date": "Datum",
+    "testResult": "Testergebnis",
+    "address": "Adresse",
+    "dob": "Geburtsdatum",
+    "createdDate": "Erstellungsdatum",
+    "createNew": "Erstelle neu",
+    "searchForEmployee": "Suche nach Kandidat",
+    "firsrNameAndLastName": "Vorname und Nachname",
+    "editTest": "Test bearbeiten",
+    "unlock": "Freischalten",
+    "now": "Jetzt",
+    "additionalInfo": "Zusätzliche Information",
+    "message": "Nachricht",
+    "cancel": "Abbrechen",
+    "save": "Speichern",
+    "sendAndSendEmail": "E-Mail senden und speichern",
+    "downloadConfirmation": "Bestätigung herunterladen",
+    "downloadMessage": "Möchten Sie den Test für diesen Kandidat herunterladen?",
+    "emailConfirmation": "E-Mail-Bestätigung senden",
+    "emailMessage": "Möchten Sie erneut E-Mails mit Covid-Testdokument senden?",
+    "yes": "Bestätigen",
+    "no": "Nein",
+    "edit": "Bearbeiten",
+    "loadAll": "Laden Sie alle Tests für Kandidaten",
+    "delete": "Erfolgreich gelöscht",
+    "delete?": "Möchten Sie diesen Kandidaten löschen?",
+    "deleteConfim": "Bestätigung löschen",
+    "addedSuccesfully": "Kandidat erfolgreich hinzugefügt"
+  },
+   "homeScreen": {
+    "hi": "hallo",
+    "loginText": "Sie sind im MTP Testzentrum angemeldet!!",
+    "create": "Test erstellen"
   }
 }

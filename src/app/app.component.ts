@@ -4,7 +4,7 @@ import { AccountService, AlertService } from "./_services";
 import { User } from "./_models";
 import { MenuItem } from "primeng/api";
 import { adminId } from "./_helpers/constants";
-import { TranslateService } from "@ngx-translate/core";
+import { LangChangeEvent, TranslateService } from "@ngx-translate/core";
 
 @Component({ selector: "app", templateUrl: "app.component.html" })
 export class AppComponent implements OnInit {
@@ -14,12 +14,19 @@ export class AppComponent implements OnInit {
   initials: String = "";
   fullName: String = "";
 
+  translateStrings: any;
+
   constructor(
     private accountService: AccountService,
     private alertService: AlertService,
     private translate: TranslateService
   ) {
-    translate.setDefaultLang("de");
+    if (this.localStorageItem("language")) {
+      translate.setDefaultLang(localStorage.getItem("language") ?? "de");
+    } else {
+      translate.setDefaultLang("de");
+    }
+    translate.addLangs(["en", "de"]);
 
     this.initials =
       localStorage.getItem("user") === null
@@ -35,20 +42,14 @@ export class AppComponent implements OnInit {
         : JSON.parse(localStorage.getItem("user")!).name;
     this.accountService.user.subscribe((x) => (this.user = x));
 
-    this.userItems = [
-      {
-        label: "User options",
-        items: [
-          {
-            label: "Logout",
-            command: () => this.logout(),
-            icon: "pi pi-fw pi-power-off",
-          },
-        ],
-      },
-    ];
+    this.userItems = [];
+    this.items = [];
 
-    this.items = this.getMenu();
+    this.translate.get("main").subscribe((data: any) => {
+      this.translateStrings = data;
+      this.items = this.getMenu();
+      this.userItems = this.getUserOptions();
+    });
   }
 
   ngOnInit(): void {
@@ -57,10 +58,36 @@ export class AppComponent implements OnInit {
         this.items = this.getMenu();
       },
     });
+
+    this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
+      this.translateStrings = event.translations.main;
+      this.items = this.getMenu();
+      this.userItems = this.getUserOptions();
+    });
   }
 
   logout() {
     this.accountService.logout();
+  }
+
+  getUserOptions() {
+    return [
+      {
+        label: this.translateStrings?.userOptions,
+        items: [
+          {
+            label: this.translateStrings?.changeLanguage,
+            command: () => this.changeLanguage(),
+            icon: "pi pi-fw pi-globe",
+          },
+          {
+            label: this.translateStrings?.logOut,
+            command: () => this.logout(),
+            icon: "pi pi-fw pi-power-off",
+          },
+        ],
+      },
+    ];
   }
 
   getMenu() {
@@ -71,16 +98,16 @@ export class AppComponent implements OnInit {
         routerLink: "/covid-tests",
       },
       {
-        label: "Candidate",
+        label: this.translateStrings?.candidates,
         icon: "pi pi-fw pi-user",
         routerLink: "/employees",
       },
       {
-        label: "Users",
+        label: this.translateStrings?.users,
         icon: "pi pi-fw pi-user",
         routerLink: "/users",
         visible: this.getUuid() === adminId,
-      }
+      },
     ];
   }
 
@@ -114,5 +141,10 @@ export class AppComponent implements OnInit {
     return localStorage.getItem("user") === null
       ? "user"
       : JSON.parse(localStorage.getItem("user")!).uuid;
+  }
+
+  changeLanguage(): void {
+    this.translate.use(this.translateStrings.languageToChange);
+    localStorage.setItem("language", this.translateStrings.languageToChange);
   }
 }

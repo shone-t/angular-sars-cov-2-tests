@@ -90,7 +90,7 @@ export class ListComponent {
   }
 
   deleteUserFunction(id: string): void {
-    const user = this.users!.find((x) => x.uuid === id);
+    const user = this.usersData!.find((x) => x.uuid === id);
     // user.isDeleting = true;
     this.accountService
       .delete(id)

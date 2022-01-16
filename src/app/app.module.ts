@@ -1,6 +1,10 @@
 import { NgModule } from "@angular/core";
 import { BrowserModule } from "@angular/platform-browser";
-import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
+import {
+  HttpClient,
+  HttpClientModule,
+  HTTP_INTERCEPTORS,
+} from "@angular/common/http";
 
 // used to create fake backend
 // import { fakeBackendProvider } from "./_helpers";
@@ -8,7 +12,6 @@ import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common
 import { AppRoutingModule } from "./app-routing.module";
 import { JwtInterceptor, ErrorInterceptor } from "./_helpers";
 import { AppComponent } from "./app.component";
-import { HomeComponent } from "./home";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { AvatarModule } from "primeng/avatar";
 import { MenubarModule } from "primeng/menubar";
@@ -19,8 +22,9 @@ import { MessageModule } from "primeng/message";
 import { ToastModule } from "primeng/toast";
 import { MessageService } from "primeng/api";
 import { HashLocationStrategy, LocationStrategy } from "@angular/common";
-import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
-import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+import { TranslateLoader, TranslateModule } from "@ngx-translate/core";
+import { TranslateHttpLoader } from "@ngx-translate/http-loader";
+import { HomeModule } from "./home/home.module";
 
 @NgModule({
   imports: [
@@ -35,16 +39,17 @@ import {TranslateHttpLoader} from '@ngx-translate/http-loader';
     MessagesModule,
     MessageModule,
     ToastModule,
+    HomeModule,
     HttpClientModule,
-        TranslateModule.forRoot({
-            loader: {
-                provide: TranslateLoader,
-                useFactory: HttpLoaderFactory,
-                deps: [HttpClient]
-            }
-        })
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient],
+      },
+    }),
   ],
-  declarations: [AppComponent, HomeComponent],
+  declarations: [AppComponent],
   providers: [
     MessageService,
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

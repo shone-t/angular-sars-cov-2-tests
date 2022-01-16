@@ -14,7 +14,7 @@ import { CandidatesService } from "../_services/candidates.service";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { CovidTest } from "../_models";
 import { Table } from "primeng/table";
-import { TranslateService } from "@ngx-translate/core";
+import { LangChangeEvent, TranslateService } from "@ngx-translate/core";
 
 @Component({
   selector: "app-covid-tests",
@@ -77,9 +77,9 @@ export class CovidTestsComponent implements OnInit {
     private messageService: MessageService,
     private translate: TranslateService
   ) {
-    this.translate.get('covidTest').subscribe((data:any)=> {
+    this.translate.get("covidTest").subscribe((data: any) => {
       this.translateStrings = data;
-     });
+    });
     this.formCovidTest = this._formBuilder.group({});
     this.createForm();
   }
@@ -96,6 +96,10 @@ export class CovidTestsComponent implements OnInit {
       { label: "POSITIVE", value: true },
       { label: "NEGATIVE", value: false },
     ];
+
+    this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
+      this.translateStrings = event.translations.covidTest;
+    });
   }
 
   openNew() {
@@ -279,10 +283,9 @@ export class CovidTestsComponent implements OnInit {
     this.formCovidTest.get("createdTest")?.patchValue(new Date());
   }
 
-  printCovidTest(id: string) {
-    console.log("printCovidTest", id);
+  printCovidTest(covidTest: any) {
     this.covidTestService
-      .printAndDownloadTest(id)
+      .printAndDownloadTest(covidTest.uuid)
       .pipe(take(1))
       .subscribe({
         next: (file) => {
@@ -290,7 +293,9 @@ export class CovidTestsComponent implements OnInit {
           const downloadUrl = window.URL.createObjectURL(blob);
           const link = document.createElement("a");
           link.href = downloadUrl;
-          link.download = "TestPdf.pdf";
+          link.download = `Covid-Test ${covidTest.name} ${new Date(
+            covidTest.createdTest
+          ).toLocaleString(["de-DE"], { dateStyle: "medium" })}.pdf`;
           link.click();
         },
       });
@@ -307,17 +312,19 @@ export class CovidTestsComponent implements OnInit {
       });
   }
 
-  confirmation(type: string, id: string) {
+  confirmation(type: string, covidtest: any) {
     this.confirmationService.confirm({
-      message: 
+      message:
         type === "download"
-          ? this.translateStrings['downloadMessage']
-          : this.translateStrings['emailMessage']
-      ,
-      header: type === "download" ? this.translateStrings['downloadConfirmation'] : this.translateStrings['emailConfirmation'],
+          ? this.translateStrings["downloadMessage"]
+          : this.translateStrings["emailMessage"],
+      header:
+        type === "download"
+          ? this.translateStrings["downloadConfirmation"]
+          : this.translateStrings["emailConfirmation"],
       icon: "pi pi-info-circle",
-      acceptLabel: this.translateStrings['yes'],
-      rejectLabel: this.translateStrings['no'],
+      acceptLabel: this.translateStrings["yes"],
+      rejectLabel: this.translateStrings["no"],
       accept: () => {
         this.messageService.add({
           severity: "info",
@@ -325,9 +332,9 @@ export class CovidTestsComponent implements OnInit {
           detail: "Record deleted",
         });
         if (type === "download") {
-          this.printCovidTest(id);
+          this.printCovidTest(covidtest);
         } else if (type === "mail") {
-          this.sendMailAgain(id);
+          this.sendMailAgain(covidtest.uuid);
         }
       },
       reject: (type: any) => {

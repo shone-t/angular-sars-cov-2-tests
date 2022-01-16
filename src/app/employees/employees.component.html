@@ -2,8 +2,8 @@
     <div class="card">
         <p-toolbar styleClass="p-mb-4">
             <ng-template pTemplate="left">
-                <button pButton pRipple label="New" icon="pi pi-plus" class="p-button-success p-mr-2"
-                    (click)="openNew()"></button>
+                <button pButton pRipple label="{{'main.new' | translate}}" icon="pi pi-plus"
+                    class="p-button-success p-mr-2" (click)="openNew()"></button>
                 <!-- <button pButton pRipple label="Delete" icon="pi pi-trash" class="p-button-danger"></button> -->
             </ng-template>
         </p-toolbar>
@@ -20,7 +20,7 @@
             [showCurrentPageReport]="true" sortField="createdAt" [sortOrder]="-1">
             <ng-template pTemplate="caption">
                 <div class="p-d-flex p-ai-center p-jc-between">
-                    <h5 class="p-m-0">Candidates</h5>
+                    <h5 class="p-m-0">{{'employee.candidates' | translate}}</h5>
                     <span class="p-input-icon-left p-0 col-sm-6">
                         <i class="pi pi-search"></i>
                         <input pInputText type="text" class="w-100" (input)="searchEmployee($event)"
@@ -33,16 +33,16 @@
                     <th pSortableColumn="name">
                         Name <p-sortIcon field="name"></p-sortIcon>
                     </th>
-                    <th>Date of birth</th>
+                    <th>{{'employee.dob' | translate}}</th>
                     <th pSortableColumn="emailOrTelephone">
                         Email
                         <p-sortIcon field="emailOrTelephone"> </p-sortIcon>
                     </th>
                     <th pSortableColumn="address">
-                        Address <p-sortIcon field="address"></p-sortIcon>
+                        {{'employee.address' | translate}} <p-sortIcon field="address"></p-sortIcon>
                     </th>
                     <th pSortableColumn="createdAt">
-                        Created Date <p-sortIcon field="createdAt"></p-sortIcon>
+                        {{'employee.createdDate' | translate}} <p-sortIcon field="createdAt"></p-sortIcon>
                     </th>
                     <th></th>
                 </tr>
@@ -69,13 +69,14 @@
 </div>
 
 <p-dialog [(visible)]="productDialog" (onHide)="hideDialog()" [style]="{ width: '90%' }"
-    [header]="editMode ? 'Edit Candidate' : 'Create New'" [modal]="true" [draggable]="false" styleClass="p-fluid">
+    [header]="editMode ? translateStrings.edit : translateStrings.createNew" [modal]="true" [draggable]="false"
+    styleClass="p-fluid">
     <ng-template pTemplate="content">
 
         <form autocomplete="off" [formGroup]="formEmployee" (ngSubmit)="saveEmployee()">
 
             <div class="p-field p-mb-1">
-                <label for="description">First Name and Last Name</label>
+                <label for="description">{{ 'employee.firsrNameAndLastName' | translate }}</label>
                 <div class="p-inputgroup">
                     <span class="p-inputgroup-addon"><i class="pi pi-user"></i></span>
                     <input type="text" formControlName="name" pInputText required autofocus placeholder="Name">
@@ -83,15 +84,16 @@
             </div>
 
             <div class="p-field p-mb-1">
-                <label for="description">Address</label>
+                <label for="description">{{ 'employee.address' | translate }}</label>
                 <div class="p-inputgroup">
                     <span class="p-inputgroup-addon"><i class="pi pi-compass"></i></span>
-                    <input type="text" formControlName="address" pInputText required autofocus placeholder="Address">
+                    <input type="text" formControlName="address" pInputText required autofocus
+                        placeholder="{{ 'employee.address' | translate }}">
                 </div>
             </div>
 
             <div class="p-field p-mb-1">
-                <label for="description">Date of birth</label>
+                <label for="description">{{ 'employee.dob' | translate }}</label>
                 <div class="p-field date-mask-input">
                     <span class="p-inputgroup-addon"><i class="pi pi-calendar"></i></span>
                     <p-inputMask mask="99/99/9999" formControlName="dateOfBirth" placeholder="21.12.1990"
@@ -113,10 +115,10 @@
     </ng-template>
 
     <ng-template pTemplate="footer">
-        <button type="button" (click)="hideDialog()" pButton pRipple label="Cancel" icon="pi pi-times"
-            class="p-button-raised p-button-warning p-button-text"></button>
-        <button type="button" [disabled]="!formEmployee.valid" pButton pRipple (click)="saveEmployee()" label="Save"
-            icon="pi pi-check" class="p-button-raised p-button-text"></button>
+        <button type="button" (click)="hideDialog()" pButton pRipple label="{{ 'employee.cancel' | translate }}"
+            icon="pi pi-times" class="p-button-raised p-button-warning p-button-text"></button>
+        <button type="button" [disabled]="!formEmployee.valid" pButton pRipple (click)="saveEmployee()"
+            label="{{ 'employee.save' | translate }}" icon="pi pi-check" class="p-button-raised p-button-text"></button>
     </ng-template>
 </p-dialog>
 
@@ -134,11 +136,11 @@
             <ng-template pTemplate="header">
                 <tr>
                     <th>Name</th>
-                    <th>Date</th>
-                    <th>Test Result</th>
+                    <th>{{ 'employee.date' | translate }}</th>
+                    <th>{{ 'employee.testResult' | translate }}</th>
                     <th>Email</th>
-                    <th>Address</th>
-                    <th>Date of birth</th>
+                    <th>{{ 'employee.address' | translate }}</th>
+                    <th>{{ 'employee.dob' | translate }}</th>
                     <th></th>
                 </tr>
             </ng-template>

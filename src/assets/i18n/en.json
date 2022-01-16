@@ -5,7 +5,13 @@
     "to": "to",
     "of": "of",
     "entries": "entries",
-    "password": "Password"
+    "password": "Password",
+    "candidates": "Candidates",
+    "users": "Users",
+    "userOptions": "User options",
+    "logOut": "Logout",
+    "changeLanguage": "Change to German",
+    "languageToChange": "de"
   },
   "passwordStrength":{
       "pickPassword": "Pick a password",
@@ -60,5 +66,42 @@
     "emailMessage": "Do you want to send mail again with Covid Test Document?",
     "yes": "Yes",
     "no": "No"
+  },
+   "employee": {
+    "search": "Search...",
+    "candidates": "Candidates",
+    "date": "Date",
+    "testResult": "Test Result",
+    "address": "Address",
+    "dob": "Date of birth",
+    "createdDate": "Created Date",
+    "createNew": "Create New",
+    "searchForEmployee": "Search for Candidate",
+    "firsrNameAndLastName": "First Name and Last Name",
+    "editTest": "Edit Test",
+    "unlock": "Unlock",
+    "now": "Now",
+    "additionalInfo": "Additional Info",
+    "message": "Message",
+    "cancel": "Cancel",
+    "save": "Save",
+    "sendAndSendEmail": "Send and send email",
+    "downloadConfirmation": "Download Confirmation",
+    "downloadMessage": "Do you want to download test for this candidate?",
+    "emailConfirmation": "Send mail Confirmation",
+    "emailMessage": "Do you want to send mail again with Covid Test Document?",
+    "yes": "Yes",
+    "no": "No",
+    "edit": "Edit",
+    "loadAll": "Load all tests for employee",
+    "delete": "Employee deleted successfully",
+    "delete?": "Do you want to delete this employee?",
+    "deleteConfim": "Delete Confirmation",
+    "addedSuccesfully": "Employee added successfully"
+  },
+  "homeScreen": {
+    "hi": "hi",
+    "loginText": "You're logged in MTP Testzentrum!!",
+    "create": "Create test"
   }
 }

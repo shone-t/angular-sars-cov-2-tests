@@ -12,6 +12,7 @@ import { CandidatesService } from "../_services/candidates.service";
 import { Employee } from "./../_models/employee";
 import { AlertService } from "../_services";
 import { Table } from "primeng/table";
+import { LangChangeEvent, TranslateService } from "@ngx-translate/core";
 
 @Component({
   selector: "app-employees",
@@ -38,12 +39,15 @@ export class EmployeesComponent implements OnInit {
   lastTableLazyLoadEvent: LazyLoadEvent = {};
   usersData: any[] = [];
 
+  translateStrings: any;
+
   constructor(
     private service: CandidatesService,
     private _formBuilder: FormBuilder,
     private alertService: AlertService,
     private confirmationService: ConfirmationService,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private translate: TranslateService
   ) {
     this.formEmployee = this._formBuilder.group({
       uuid: [""],
@@ -54,7 +58,14 @@ export class EmployeesComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.translate.get("employee").subscribe((data: any) => {
+      this.translateStrings = data;
+    });
+    this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
+      this.translateStrings = event.translations.employee;
+    });
+  }
 
   loadEmployees(event: any) {
     this.loading = true;
@@ -149,7 +160,7 @@ export class EmployeesComponent implements OnInit {
       .pipe(take(1))
       .subscribe({
         next: () => {
-          this.alertService.success("Employee added successfully");
+          this.alertService.success(this.translateStrings.addedSuccesfully);
           this.productDialog = false;
           this.loading = false;
           this.loadEmployees(this.lastTableLazyLoadEvent);
@@ -166,9 +177,11 @@ export class EmployeesComponent implements OnInit {
 
   deleteEmployeeConfirm(employee: Employee) {
     this.confirmationService.confirm({
-      message: "Do you want to delete this employee?",
-      header: "Delete Confirmation",
+      message: this.translateStrings.delete,
+      header: this.translateStrings.deleteConfim,
       icon: "pi pi-info-circle",
+      acceptLabel: this.translateStrings["yes"],
+      rejectLabel: this.translateStrings["no"],
       accept: () => {
         this.messageService.add({
           severity: "info",
@@ -204,7 +217,7 @@ export class EmployeesComponent implements OnInit {
       .pipe(take(1))
       .subscribe({
         next: (el) => {
-          this.alertService.success("Employee deleted successfully");
+          this.alertService.success(this.translateStrings.delete);
           this.loadEmployees(this.lastTableLazyLoadEvent);
         },
         error: (err) => {
@@ -222,7 +235,7 @@ export class EmployeesComponent implements OnInit {
       .pipe(take(1))
       .subscribe({
         next: (res) => {
-          this.alertService.success("Load all tests for employee");
+          this.alertService.success(this.translateStrings.loadAll);
           this.usersData = res;
           this.loading = false;
         },

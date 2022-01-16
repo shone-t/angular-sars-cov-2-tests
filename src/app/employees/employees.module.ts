@@ -1,5 +1,6 @@
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
+import { TranslateModule } from "@ngx-translate/core";
 import { EmployeesComponent } from "./employees.component";
 import { EmployeesRoutingModule } from "./employees-routing.module";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
@@ -40,6 +41,7 @@ import { ConfirmationService, MessageService } from "primeng/api";
     CalendarModule,
     InputMaskModule,
     ConfirmDialogModule,
+    TranslateModule,
   ],
   exports: [EmployeesComponent],
   providers: [ConfirmationService, MessageService],

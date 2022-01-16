@@ -1,7 +1,8 @@
 ﻿<div class="p-4">
     <div class="container">
-        <h1>Hi {{user?.name}}!</h1>
-        <p>You're logged in MTP Testzentrum!!</p>
-        <p><a routerLink="/covid-tests">Create tests</a></p>
+        <h1>{{'homeScreen.hi' | translate | titlecase}} {{user?.name}}!</h1>
+        <p>{{ 'homeScreen.loginText' | translate }}</p>
+        <button pButton pRipple routerLink='/covid-tests' routerLinkActive="router-link-active"
+            label="{{'homeScreen.create' | translate}}" icon="pi pi-plus" class="p-button-success p-mr-2"></button>
     </div>
 </div>
