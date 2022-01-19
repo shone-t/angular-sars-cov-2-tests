@@ -8,8 +8,8 @@
       </ng-template>
     </p-toolbar>
 
-    <p-table #dt [lazy]="true" [loading]="loading" (onLazyLoad)="loadTests($event)" [value]="covidTestsData" [rows]="10"
-      [paginator]="true" [totalRecords]="totalRecords" [globalFilterFields]="[
+    <p-table #dt [lazy]="true" (onLazyLoad)="loadTests($event)" [value]="covidTestsData" [rows]="10" [paginator]="true"
+      [totalRecords]="totalRecords" [globalFilterFields]="[
         'name',
         'country.name',
         'representative.name',

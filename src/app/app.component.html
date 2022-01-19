@@ -42,5 +42,9 @@
       <router-outlet></router-outlet>
     </div>
   </div>
+  <div *ngIf="loading" class="loading-container flex-content-center">
+    <p-progressSpinner class="loading-spinner"></p-progressSpinner>
+  </div>
+
   <!-- End Content -->
 </main>

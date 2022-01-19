@@ -5,6 +5,8 @@ import { User } from "./_models";
 import { MenuItem } from "primeng/api";
 import { adminId } from "./_helpers/constants";
 import { LangChangeEvent, TranslateService } from "@ngx-translate/core";
+import { LoadingService } from "./_services/loading.service";
+import { delay } from "rxjs";
 
 @Component({ selector: "app", templateUrl: "app.component.html" })
 export class AppComponent implements OnInit {
@@ -14,12 +16,15 @@ export class AppComponent implements OnInit {
   initials: String = "";
   fullName: String = "";
 
+  loading: boolean = false;
+
   translateStrings: any;
 
   constructor(
     private accountService: AccountService,
     private alertService: AlertService,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private _loading: LoadingService
   ) {
     if (this.localStorageItem("language")) {
       translate.setDefaultLang(localStorage.getItem("language") ?? "de");
@@ -53,6 +58,7 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.listenToLoading();
     this.accountService.user.subscribe({
       next: (user: User) => {
         this.items = this.getMenu();
@@ -146,5 +152,13 @@ export class AppComponent implements OnInit {
   changeLanguage(): void {
     this.translate.use(this.translateStrings.languageToChange);
     localStorage.setItem("language", this.translateStrings.languageToChange);
+  }
+
+  listenToLoading(): void {
+    this._loading.loadingSub
+      .pipe(delay(0)) // This prevents a ExpressionChangedAfterItHasBeenCheckedError for subsequent requests
+      .subscribe((loading) => {
+        this.loading = loading;
+      });
   }
 }
