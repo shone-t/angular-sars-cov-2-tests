@@ -1,6 +1,9 @@
 ﻿import { Injectable } from "@angular/core";
 import { MessageService } from "primeng/api";
-import { toastDuration } from "../_helpers/constants";
+import {
+  toastSuccessDuration,
+  toastErrorDuration,
+} from "../_helpers/constants";
 
 @Injectable({ providedIn: "root" })
 export class AlertService {
@@ -12,7 +15,7 @@ export class AlertService {
       severity: "success",
       summary: "Success",
       detail: message,
-      life: toastDuration,
+      life: toastSuccessDuration,
     });
   }
 
@@ -21,7 +24,7 @@ export class AlertService {
       severity: "error",
       summary: "Error",
       detail: message,
-      life: toastDuration,
+      life: toastErrorDuration,
     });
   }
 
@@ -30,7 +33,7 @@ export class AlertService {
       severity: "info",
       summary: "Info",
       detail: message,
-      life: toastDuration,
+      life: toastSuccessDuration,
     });
   }
 
@@ -39,7 +42,7 @@ export class AlertService {
       severity: "warn",
       summary: "Warn",
       detail: message,
-      life: toastDuration,
+      life: toastErrorDuration,
     });
   }
 

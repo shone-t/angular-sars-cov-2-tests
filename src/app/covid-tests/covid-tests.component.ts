@@ -302,7 +302,6 @@ export class CovidTestsComponent implements OnInit {
   }
 
   sendMailAgain(id: string) {
-    console.log("sandMailAgain", id);
     this.covidTestService
       .sendMailAgain(id)
       .pipe(take(1))

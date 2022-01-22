@@ -26,7 +26,6 @@ export class VerifyComponent implements OnInit {
       this.router.getCurrentNavigation()?.extras?.state
     ) {
       this.email = this.router.getCurrentNavigation()?.extras?.state!["email"];
-      console.log(this.router.getCurrentNavigation()?.extras?.state);
     } else {
       this.router.navigate(["./login"]);
     }

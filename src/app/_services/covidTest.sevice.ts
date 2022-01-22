@@ -49,15 +49,12 @@ export class CovidTestsService {
 
   saveTest(testData: CovidTest, edit: boolean): Observable<any> {
     if (edit) {
-      // console.log("testData", testData);
-      // return of(testData);
-      return this.http
-        .put(`${environment.apiUrl}/covid-tests/${testData.uuid}`, testData)
-        .pipe(tap((res) => console.log("service res:", res)));
+      return this.http.put(
+        `${environment.apiUrl}/covid-tests/${testData.uuid}`,
+        testData
+      );
     } else {
-      return this.http
-        .post(`${environment.apiUrl}/covid-tests`, testData)
-        .pipe(tap((res) => console.log("service res:", res)));
+      return this.http.post(`${environment.apiUrl}/covid-tests`, testData);
     }
   }
 

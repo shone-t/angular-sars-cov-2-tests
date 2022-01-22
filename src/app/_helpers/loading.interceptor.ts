@@ -6,9 +6,10 @@ import {
   HttpInterceptor,
   HttpResponse,
 } from "@angular/common/http";
-import { Observable } from "rxjs";
+import { Observable, throwError } from "rxjs";
 import { catchError, map } from "rxjs/operators";
 import { LoadingService } from "../_services/loading.service";
+import { AccountService } from "../_services";
 
 /**
  * This class is for intercepting http requests. When a request starts, we set the loadingSub property
@@ -18,7 +19,10 @@ import { LoadingService } from "../_services/loading.service";
  */
 @Injectable()
 export class HttpRequestInterceptor implements HttpInterceptor {
-  constructor(private _loading: LoadingService) {}
+  constructor(
+    private accountService: AccountService,
+    private _loading: LoadingService
+  ) {}
 
   intercept(
     request: HttpRequest<any>,
@@ -30,7 +34,17 @@ export class HttpRequestInterceptor implements HttpInterceptor {
       .pipe(
         catchError((err) => {
           this._loading.setLoading(false, request.url);
-          return err;
+          if (
+            [401, 403].includes(err.status) &&
+            this.accountService.userValue
+          ) {
+            // auto logout if 401 or 403 response returned from api
+            this.accountService.logout();
+          }
+
+          const error = err.error?.message || err.statusText;
+          console.error(err);
+          return throwError(() => error);
         })
       )
       .pipe(

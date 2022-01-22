@@ -10,11 +10,7 @@ import {
 // import { fakeBackendProvider } from "./_helpers";
 
 import { AppRoutingModule } from "./app-routing.module";
-import {
-  JwtInterceptor,
-  ErrorInterceptor,
-  HttpRequestInterceptor,
-} from "./_helpers";
+import { JwtInterceptor, HttpRequestInterceptor } from "./_helpers";
 import { AppComponent } from "./app.component";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { AvatarModule } from "primeng/avatar";
@@ -59,7 +55,7 @@ import { ProgressSpinnerModule } from "primeng/progressspinner";
   providers: [
     MessageService,
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+    // { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     {
       provide: HTTP_INTERCEPTORS,
       useClass: HttpRequestInterceptor,
