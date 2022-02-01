@@ -15,6 +15,7 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { CovidTest } from "../_models";
 import { Table } from "primeng/table";
 import { LangChangeEvent, TranslateService } from "@ngx-translate/core";
+import { adminId } from "../_helpers/constants";
 
 @Component({
   selector: "app-covid-tests",
@@ -33,6 +34,8 @@ export class CovidTestsComponent implements OnInit {
   loading: boolean = true;
   filterValue: LazyLoadEvent = {};
   searchText: string = "";
+
+  isAdmin = false;
 
   autoCompleteText: any[] = [];
   autoCompleteResults: any[] = [];
@@ -100,6 +103,8 @@ export class CovidTestsComponent implements OnInit {
     this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
       this.translateStrings = event.translations.covidTest;
     });
+
+    this.checkIsAdmin();
   }
 
   openNew() {
@@ -144,6 +149,10 @@ export class CovidTestsComponent implements OnInit {
         this.covidTestsData = data["rows"];
         this.totalRecords = data["count"];
         this.loading = false;
+        // window.scrollTo({
+        //   top: 200,
+        //   behavior: "smooth",
+        // });
       });
   }
 
@@ -355,5 +364,14 @@ export class CovidTestsComponent implements OnInit {
         }
       },
     });
+  }
+
+  checkIsAdmin(): void {
+    const uuid =
+      localStorage.getItem("user") === null
+        ? "user"
+        : JSON.parse(localStorage.getItem("user")!).uuid;
+
+    this.isAdmin = uuid === adminId;
   }
 }
