@@ -56,9 +56,11 @@
                     <td>{{ covidTest.createdAt | date: "dd/MM/yyyy HH:mm" }}</td>
                     <td class="text-right">
                         <div class="d-flex">
-                            <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success p-mr-2"
+                            <button pButton pRipple *ngIf="isAdmin" icon="pi pi-pencil"
+                                class="p-button-rounded p-button-success p-mr-2"
                                 (click)="editEmployee(covidTest)"></button>
-                            <button pButton pRipple icon="pi pi-trash" (click)="deleteEmployeeConfirm(covidTest)"
+                            <button pButton pRipple *ngIf="isAdmin" icon="pi pi-trash"
+                                (click)="deleteEmployeeConfirm(covidTest)"
                                 class="p-button-rounded p-button-danger"></button>
                         </div>
                     </td>

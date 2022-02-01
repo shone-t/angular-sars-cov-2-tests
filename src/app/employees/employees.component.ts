@@ -13,6 +13,7 @@ import { Employee } from "./../_models/employee";
 import { AlertService } from "../_services";
 import { Table } from "primeng/table";
 import { LangChangeEvent, TranslateService } from "@ngx-translate/core";
+import { adminId } from "../_helpers/constants";
 
 @Component({
   selector: "app-employees",
@@ -38,6 +39,8 @@ export class EmployeesComponent implements OnInit {
   formEmployee: FormGroup;
   lastTableLazyLoadEvent: LazyLoadEvent = {};
   usersData: any[] = [];
+
+  isAdmin = false;
 
   translateStrings: any;
 
@@ -65,6 +68,8 @@ export class EmployeesComponent implements OnInit {
     this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
       this.translateStrings = event.translations.employee;
     });
+
+    this.checkIsAdmin();
   }
 
   loadEmployees(event: any) {
@@ -244,5 +249,14 @@ export class EmployeesComponent implements OnInit {
           this.alertService.error(err);
         },
       });
+  }
+
+  checkIsAdmin(): void {
+    const uuid =
+      localStorage.getItem("user") === null
+        ? "user"
+        : JSON.parse(localStorage.getItem("user")!).uuid;
+
+    this.isAdmin = uuid === adminId;
   }
 }
